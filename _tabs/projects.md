@@ -30,10 +30,10 @@ order: 5
 
 ---
 
-## 📚 写作类
+## 📚 阅读类
 
 ### 《我的阅读》
-> 用 MkDocs Material 写的一本书。
+> 用 MkDocs Material 整理的阅读笔记。
 
 - **在线阅读**：[hello28256.github.io/book](https://hello28256.github.io/book/)
 - **源码**：[hello28256/book](https://github.com/hello28256/book)
