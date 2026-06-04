@@ -1,0 +1,24 @@
+<section class="hero">
+  <img class="hero-avatar" src="{{ site.avatar | relative_url }}" alt="{{ site.social.name | default: site.title }}">
+
+  <div class="hero-text">
+    <h1 class="hero-name">{{ site.social.name | default: site.title }}</h1>
+
+    {%- if site.tagline -%}
+      <p class="hero-tagline">{{ site.tagline }}</p>
+    {%- endif -%}
+
+    <div class="hero-social">
+      {%- for link in site.social.links -%}
+        {%- assign host = link | split: '//' | last | split: '/' | first -%}
+        <a href="{{ link }}" rel="noopener" target="_blank">{{ host | replace: 'github.com', 'GitHub' }}</a>
+      {%- endfor -%}
+
+      {%- if site.social.email -%}
+        <a href="mailto:{{ site.social.email }}">Email</a>
+      {%- endif -%}
+
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </div>
+  </div>
+</section>
