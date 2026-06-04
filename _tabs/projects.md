@@ -32,7 +32,7 @@ order: 5
 
 ## 📚 写作类
 
-### 《我的书》
+### 《我的阅读》
 > 用 MkDocs Material 写的一本书。
 
 - **在线阅读**：[hello28256.github.io/book](https://hello28256.github.io/book/)
