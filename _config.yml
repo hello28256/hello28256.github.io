@@ -16,7 +16,7 @@ timezone: Asia/Shanghai
 
 title: hello28256 # the main title
 
-tagline: 工程师 · 写代码 · 阅读笔记 # it will display as the subtitle
+tagline: 工程师 · 写代码 · 阅读 # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   hello28256 的个人主页：技术博客、项目作品集、在线书。
