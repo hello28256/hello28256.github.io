@@ -1,5 +1,5 @@
 ---
-title: 我的书
+title: 我的阅读
 icon: fas fa-book
 order: 6
 permalink: /book/
@@ -17,6 +17,6 @@ permalink: /book/
   <meta http-equiv="refresh" content="0; url=https://hello28256.github.io/book/1001Reading/">
 </noscript>
 
-正在跳转到 [📚 我的书](https://hello28256.github.io/book/1001Reading/)...
+正在跳转到 [📚 我的阅读](https://hello28256.github.io/book/1001Reading/)...
 
 如果浏览器没有自动跳转，请点击上面的链接。
