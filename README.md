@@ -10,7 +10,7 @@
 - **`_posts/`** — 技术博客（Markdown）
 - **`_tabs/`** — 顶部导航页
   - `about.md` — 关于我
-  - `coding.md` — 跳转占位，由子站点 [hello28256/Coding](https://github.com/hello28256/Coding) 接管
+  - `coding.md` — 跳转占位，由子站点 [hello28256/coding](https://github.com/hello28256/coding) 接管
   - `book.md` — 跳转占位，由子站点 [hello28256/book](https://github.com/hello28256/book) 接管
   - `archives.md` / `categories.md` / `tags.md` — 自动生成
 - **`_includes/hero.html`** — 首页 Hero 区（自定义）
@@ -64,7 +64,7 @@ VS Code 用户也可以直接 `Cmd/Ctrl + Shift + B` 运行 `Run Jekyll Server` 
 
 子路径 `/book/1001Reading/`、`/coding/1001Coding/` 分别由独立仓库
 [hello28256/book](https://github.com/hello28256/book)、
-[hello28256/Coding](https://github.com/hello28256/Coding) 通过 GitHub Pages
+[hello28256/coding](https://github.com/hello28256/coding) 通过 GitHub Pages
 项目站点提供，DNS 解析到本仓库对应子路径后由子站点接管；`_tabs/book.md`、
 `_tabs/coding.md` 中的 JS 仅作兜底跳转。
 
