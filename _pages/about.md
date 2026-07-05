@@ -1,7 +1,7 @@
 ---
-# 默认 layout 是 page
-icon: fas fa-info-circle
-order: 4
+permalink: /about/
+title: 关于我
+search: false
 ---
 
 ## 你好 👋
@@ -30,7 +30,6 @@ order: 4
 ## 联系我
 
 - GitHub：[@hello28256](https://github.com/hello28256)
-- Email：填你的真实邮箱
+- Email：[hello28256@gmail.com](mailto:hello28256@gmail.com)
 
 > 如有合作、咨询或交流意向，欢迎邮件联系。
-{: .prompt-tip }
