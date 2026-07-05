@@ -42,7 +42,7 @@ navigation:
   - title: "关于"
     url : /about/
   - title: "Posts"
-    url : /posts/
+    url : /archive/
   - title: "我的阅读"
     url : "https://hello28256.github.io/book/"
     external: true
