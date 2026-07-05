@@ -1,6 +1,9 @@
 # Minimal Mistakes × aqua 配置（基于 mm-temp/docs/_config.yml 改造）
 
-remote_theme            : "mmistakes/minimal-mistakes@4.28.0"
+# 通过 fork/direct-copy 路线：mm 主题的 _layouts / _includes / _sass / _data
+# / assets/css/main.scss / assets/js 全部直接放在本仓里。theme gem 仍装，作为
+# fallback + 给 _sass/main.scss 提供 @import 路径。
+theme                   : "minimal-mistakes-jekyll"
 minimal_mistakes_skin   : "aqua"        # 主色 #1976d2 + 浅薄荷背景 #f0fff0
 
 # Site Settings
