@@ -2,12 +2,13 @@
 
 source "https://rubygems.org"
 
-# 不引 github-pages 元 gem —— 它会把 jekyll 锁到 3.10，
-# 3.x 的 collections 处理与 _site_template ERB 冲突。
-# 这里显式用 jekyll 4 + jekyll-remote-theme，让 GH Actions 与本地一致。
+# fork/direct-copy 路线（README 第三种安装方式）：
+# 我们把 mm 的 _layouts / _includes / _sass / _data / assets 直接 fork 进了
+# 仓库，theme gem 仍装用来给 _layouts / _includes 提供 fallback，
+# 不依赖 jekyll-remote-theme。
 
 gem "jekyll", "~> 4.4"
-gem "jekyll-remote-theme"
+gem "minimal-mistakes-jekyll"
 gem "jekyll-include-cache", group: :jekyll_plugins
 gem "jekyll-paginate"
 gem "jekyll-sitemap"
