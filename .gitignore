@@ -26,5 +26,8 @@ package-lock.json
 _sass/vendors
 assets/js/dist
 
+# macOS Finder metadata
+.DS_Store
+
 # Claude Code local runtime
 .claude/

@@ -62,7 +62,7 @@ VS Code 用户也可以直接 `Cmd/Ctrl + Shift + B` 运行 `Run Jekyll Server` 
 
 推送到 `main` 分支即触发 `.github/workflows/pages-deploy.yml`，自动构建并发布到 GitHub Pages。
 
-子路径 `/book/1001Reading/`、`/Coding/1001Coding/` 分别由独立仓库
+子路径 `/book/`、`/Coding/1001Coding/` 分别由独立仓库
 [hello28256/book](https://github.com/hello28256/book)、
 [hello28256/Coding](https://github.com/hello28256/Coding) 通过 GitHub Pages
 项目站点提供，DNS 解析到本仓库对应子路径后由子站点接管；`_tabs/book.md`、

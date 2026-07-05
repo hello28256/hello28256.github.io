@@ -16,7 +16,7 @@ order: 4
 
 - **本职**：xxx 公司后端工程师
 - **副业**：维护若干开源工具（详见 [Coding](https://hello28256.github.io/Coding/1001Coding/)）
-- **阅读笔记**：在 [我的阅读](https://hello28256.github.io/book/1001Reading/) 整理技术沉淀
+- **阅读笔记**：在 [我的阅读](https://hello28256.github.io/book/) 整理技术沉淀
 
 ## 技术栈
 
