@@ -137,63 +137,72 @@ html[data-theme="dark"] {
 .theme-toggle {
   position: relative;
   display: inline-block;
-  width: 2.5rem;   /* 40px / 16 */
-  height: 1.4rem;  /* 22px / 16 ≈ 1.375 */
+  width: 3.25rem;  /* 52px / 16：iOS Settings 开关宽度 */
+  height: 1.6rem;  /* 26px / 16 ≈ 1.625：宽度的一半 */
   margin-left: 0.75rem;
   padding: 0;
-  background: var(--mm-text-muted);
-  border: 1px solid var(--mm-border);
+  background: #e5e5ea; /* iOS 关态浅灰 */
+  border: 0;
   border-radius: 999px;
   cursor: pointer;
   vertical-align: middle;
-  transition: background 0.25s ease, border-color 0.25s ease;
+  transition: background 0.25s ease-in-out;
   flex-shrink: 0;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.04);
 }
 .theme-toggle:hover {
-  border-color: var(--mm-link);
+  background: #dcdce0;
 }
 .theme-toggle__slider {
   position: absolute;
   top: 50%;
-  left: 0.1rem;
+  left: 0.2rem;  /* 3px */
   transform: translateY(-50%);
-  width: 1rem;
-  height: 1rem;
+  width: 1.25rem;  /* 20px */
+  height: 1.25rem; /* 20px */
   background: #fff;
-  border-radius: 2px; /* VitePress 用方形滑块，半圆边框即可视觉匹配 */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  transition: transform 0.25s ease, background 0.25s ease;
+  border-radius: 50%;
+  /* iOS 软阴影：双层，模拟环境光遮罩 */
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.15),
+    0 1px 1px rgba(0, 0, 0, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease-in-out, background 0.25s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem;
-  line-height: 1;
 }
 .theme-toggle .icon-sun,
 .theme-toggle .icon-moon {
   position: absolute;
-  width: 0.7rem;
-  height: 0.7rem;
-  color: var(--mm-text); /* currentColor：让 stroke 跟随父色 */
-  transition: opacity 0.25s ease;
+  width: 0.75rem;  /* 12px */
+  height: 0.75rem;
+  color: #8e8e93; /* iOS 关态图标灰 */
+  transition: opacity 0.25s ease, color 0.25s ease;
   user-select: none;
 }
-/* 暗色主题：滑块在左，显示月亮，太阳隐藏 */
-.theme-toggle .icon-sun { opacity: 0; }
-.theme-toggle .icon-moon { opacity: 1; }
-/* 亮色主题：滑块在右（VitePress translate），显示太阳 */
-html[data-theme="light"] .theme-toggle {
-  background: var(--mm-text-muted);
+
+/* === Light 模式默认态（滑块在左 = 亮色 = 关）=== */
+.theme-toggle .icon-sun { opacity: 1; }
+.theme-toggle .icon-moon { opacity: 0; }
+
+/* === Dark 模式态（滑块在右 = 暗色 = 开）=== */
+html[data-theme="dark"] .theme-toggle {
+  background: var(--mm-link); /* #00adb5 主题色（iOS 开态彩色） */
 }
-html[data-theme="light"] .theme-toggle:hover {
-  border-color: var(--mm-link);
+html[data-theme="dark"] .theme-toggle:hover {
+  background: var(--mm-link-hover);
 }
-html[data-theme="light"] .theme-toggle__slider {
-  transform: translate(1.1rem, -50%);
-  background: #fff;
+html[data-theme="dark"] .theme-toggle__slider {
+  /* 胶囊宽 52px - 滑块 20px - 边距 3px - 滑块 3px = translate 26px */
+  transform: translate(1.625rem, -50%);
 }
-html[data-theme="light"] .theme-toggle .icon-sun { opacity: 1; }
-html[data-theme="light"] .theme-toggle .icon-moon { opacity: 0; }
+html[data-theme="dark"] .theme-toggle .icon-sun { opacity: 0; }
+html[data-theme="dark"] .theme-toggle .icon-moon { opacity: 1; }
+html[data-theme="dark"] .theme-toggle .icon-moon,
+html[data-theme="dark"] .theme-toggle .icon-sun {
+  color: #fff; /* dark 模式下图标反白 */
+}
 
 /* 颜色覆盖（仅在 data-theme 显式设置时生效） */
 html[data-theme="light"] {

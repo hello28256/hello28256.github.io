@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------------
-   主题切换：dark <-> light
-   - 默认 dark（与 _config.yml minimal_mistakes_skin: dark 一致）
-   - 首次访问：localStorage > prefers-color-scheme（fallback dark）
+   主题切换：light <-> dark
+   - 默认 light（iOS 风格：滑块左 = 关 = 亮色）
+   - 首次访问：localStorage > prefers-color-scheme（fallback light）
    - 点击切换按钮：在 light/dark 之间互切，写回 localStorage
    - 必须尽早执行（head 里同步加载）以避免 FOUC
    ---------------------------------------------------------------------------- */
@@ -33,11 +33,11 @@
     if (stored === DARK || stored === LIGHT) {
       return stored;
     }
-    /* 用户没显式选择，且 matchMedia 不可用 → 默认 dark（与 _config.yml 一致） */
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return LIGHT;
+    /* 用户没显式选择，跟随系统；不可用时 fallback light */
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return DARK;
     }
-    return DARK;
+    return LIGHT;
   }
 
   function applyTheme(theme) {
@@ -53,8 +53,8 @@
     if (!btn) return;
 
     btn.addEventListener('click', function () {
-      var current = document.documentElement.getAttribute('data-theme') || DARK;
-      var next = current === DARK ? LIGHT : DARK;
+      var current = document.documentElement.getAttribute('data-theme') || LIGHT;
+      var next = current === LIGHT ? DARK : LIGHT;
       applyTheme(next);
       setStoredTheme(next);
     });
