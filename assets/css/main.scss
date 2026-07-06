@@ -77,25 +77,35 @@ html {
    .page 容器内左缘——这需要 .page 是 position:relative，让 sidebar__right
    的 absolute 相对 .page 而非 viewport 定位。
 
-   margin-left: 50% 让 .page 整体从屏幕左 50% 处开始，
-   文章内容在 50%-100% 区间（占屏幕右 50%），左侧 1/2 空白。 */
+   .page margin-left: 0 让 .page 紧贴屏幕左缘（0-100%）；
+   .page__inner-wrap padding-left: 200px 把文章内容从 TOC 右边开始，
+   视觉上文章占 0-100% 满宽，但实际文字从屏幕 200px 起（避开 TOC）。 */
 .layout--single {
   .page {
     position: relative; /* 让 sidebar__right 的 absolute 相对 .page 定位 */
-    margin-left: 50%;
+    margin-left: 0;
+  }
+  .page__inner-wrap {
+    padding-left: 200px; /* 避开 absolute 定位的 TOC（200px 宽） */
   }
   @include breakpoint($large) {
     .page {
       width: 100% !important;
       padding-inline-end: 0 !important;
-      margin-left: 50% !important;
+      margin-left: 0 !important;
+    }
+    .page__inner-wrap {
+      padding-left: 200px; /* large 断点 TOC 还是 200px（$right-sidebar-width-narrow） */
     }
   }
   @include breakpoint($x-large) {
     .page {
       width: 100% !important;
       padding-inline-end: 0 !important;
-      margin-left: 50% !important;
+      margin-left: 0 !important;
+    }
+    .page__inner-wrap {
+      padding-left: 200px; /* x-large 也保持 200px 避开 TOC */
     }
   }
 }
