@@ -134,31 +134,110 @@ html {
   word-break: break-word;
 }
 
-/* 6. 去掉 mm 主题给 TOC 加的青色标题块和边框（保持简洁） */
+/* ============================================================================
+   文章 TOC 仿 /book (VitePress) 的 VPDocAsideOutline 风格
+   - 无背景、无边框、无标题块
+   - 标题 "本页目录" 小字、灰色
+   - 链接 14px / 32px 行高、默认灰、hover/active 用品牌绿
+   - 当前项左侧 2px 绿色 marker（仿 VitePress outline-marker）
+   - 列表项之间无 border
+   ============================================================================ */
+
+/* 6. 去掉 mm 主题给 .toc 加的 background/border/box-shadow */
 .sidebar__right .toc {
   background: transparent;
   border: 0;
   padding: 0;
   box-shadow: none;
+  font-family: inherit;       /* 覆盖 mm $sans-serif-narrow */
+  color: var(--mm-text-muted);
+}
 
-  > header {
-    background: transparent;
-    border: 0;
-    padding: 0;
-    margin-bottom: 0.5em;
-  }
+/* 7. .toc > header：去掉青色标题块；"目录"文字改小字灰标题 */
+.sidebar__right .toc > header {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin-bottom: 0.75em;     /* 跟 VitePress outline-title 下边距 8px ~ 0.5em */
 
   .nav__title {
-    color: inherit;
-    font-size: 1rem;
-    font-weight: bold;
-    letter-spacing: 0.02em;
+    /* 覆盖 mm：color:#fff / background:$primary-color / padding:0.5rem 0.75rem
+       / font-size:$type-size-6 / font-weight:bold */
+    background: transparent !important;
+    color: var(--mm-text-muted) !important;
+    padding: 0 !important;
+    margin: 0;
+    font-family: inherit;
+    font-size: 0.875rem;     /* 14px，仿 VitePress outline-title */
+    font-weight: 600;
+    line-height: 32px;       /* 跟链接行高一致，对齐感强 */
+    letter-spacing: 0.01em;
+    border-radius: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: 0;
+
+    /* 去掉 mm 加的 <i class="fas fa-file-alt"> 文件图标 */
+    i {
+      display: none;
+    }
   }
 }
 
-/* 7. TOC 列表项之间去掉横线（mm 主题默认 border-bottom: 1px solid） */
-.toc__menu a {
-  border-bottom: 0 !important;
+/* 8. .toc__menu 列表：去掉项间 border、统一字号行高 */
+.toc__menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;       /* 14px，覆盖 mm $type-size-6/7 */
+
+  a {
+    display: block;
+    padding: 0;              /* 覆盖 mm 0.25rem 0.75rem；行高 32px 撑开 */
+    line-height: 32px;       /* 仿 VitePress outline-link */
+    color: var(--mm-text-muted);
+    font-weight: normal;     /* 覆盖 mm font-weight: bold */
+    border-bottom: 0 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.25s;
+    border-radius: 0;
+
+    &:hover {
+      color: var(--mm-text);
+    }
+  }
+
+  /* 嵌套层级缩进：H3 比 H2 多缩 13px（仿 VitePress outline-link.nested） */
+  li ul > li a {
+    padding-inline-start: 13px;
+  }
+
+  li ul li ul > li a {
+    padding-inline-start: 26px;
+  }
+
+  /* 当前项：左侧 2px 绿色 marker + 文字用品牌绿 + 加粗 */
+  .active a {
+    color: var(--mm-link) !important;  /* 仿 VitePress active 文字色 */
+    font-weight: 600;
+    position: relative;
+  }
+}
+
+/* 9. 当前项左侧 2px 绿色 marker（仿 VitePress outline-marker） */
+.sidebar__right .toc .toc__menu .active a::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10px;              /* 略向左突出，跟 VitePress 一样 */
+  transform: translateY(-50%);
+  width: 2px;
+  height: 18px;
+  background-color: var(--mm-link);
+  border-radius: 2px;
+  opacity: 1;               /* 默认显示；scrollspy 切 .active 时 marker 跟着切 */
+  transition: top 0.25s cubic-bezier(0, 1, 0.5, 1), opacity 0.25s;
 }
 
 /* ----------------------------------------------------------------------------
@@ -328,8 +407,7 @@ html[data-theme="light"] pre {
   color: var(--mm-code-text);
   border-color: var(--mm-border);
 }
-html[data-theme="light"] .sidebar__right .toc { color: var(--mm-text); }
-html[data-theme="light"] .sidebar__right .toc a { color: var(--mm-link); }
+html[data-theme="light"] .sidebar__right .toc { color: var(--mm-text-muted); }
 html[data-theme="light"] .toc__menu a { color: var(--mm-text-muted); }
 html[data-theme="light"] .toc__menu a:hover,
 html[data-theme="light"] .toc__menu .active a { color: var(--mm-link); }
