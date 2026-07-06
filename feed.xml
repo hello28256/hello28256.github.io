@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://hello28256.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://hello28256.github.io/" rel="alternate" type="text/html" /><updated>2026-07-06T17:03:53+08:00</updated><id>https://hello28256.github.io/feed.xml</id><title type="html">hello28256</title><subtitle>hello28256 的个人主页：技术博客、项目作品集、在线书。</subtitle><author><name>hello28256</name><email>hello28256@gmail.com</email></author><entry><title type="html">文章标题（必填）</title><link href="https://hello28256.github.io/posts/2026/07/06/post-template/" rel="alternate" type="text/html" title="文章标题（必填）" /><published>2026-07-06T09:00:00+08:00</published><updated>2026-07-06T09:00:00+08:00</updated><id>https://hello28256.github.io/posts/2026/07/06/post-template</id><content type="html" xml:base="https://hello28256.github.io/posts/2026/07/06/post-template/"><![CDATA[<blockquote>
+  <p>这是写新文章的模板文件。<strong>复制 _config.yml 之外的 frontmatter 部分 + 正文骨架</strong>到新文件，改文件名即可。</p>
+</blockquote>
+
+<h2 id="一级标题h2">一级标题（H2）</h2>
+
+<h3 id="二级标题h3">二级标题（H3）</h3>
+
+<p>正文段落。多写几个段落试试节奏。MM 主题用 <code class="language-plaintext highlighter-rouge">Maxima</code> 字体，dark 皮肤下颜色 <code class="language-plaintext highlighter-rouge">#eaeaea</code>（近白）。</p>
+
+<blockquote>
+  <p>引用块：左边有青色竖条，背景略深。</p>
+
+  <p>——适合放”注意”、”引文”、”自言自语”。</p>
+</blockquote>
+
+<h3 id="1-代码块">1. 代码块</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c1"># Python 示例（高亮由 rouge 自动处理）
+</span><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">hello, </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="nf">hello</span><span class="p">([</span><span class="sh">"</span><span class="s">world</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">human</span><span class="sh">"</span><span class="p">])</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c1">// TypeScript 示例</span>
+<span class="kr">interface</span> <span class="nx">Todo</span> <span class="p">{</span> <span class="nl">id</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span> <span class="nl">title</span><span class="p">:</span> <span class="kr">string</span><span class="p">;</span> <span class="nl">done</span><span class="p">:</span> <span class="nx">boolean</span> <span class="p">}</span>
+<span class="kd">const</span> <span class="nx">todos</span><span class="p">:</span> <span class="nx">Todo</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">写一篇博客</span><span class="dl">"</span><span class="p">,</span> <span class="na">done</span><span class="p">:</span> <span class="kc">false</span> <span class="p">}]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="2-行内代码与强调">2. 行内代码与强调</h3>
+
+<ul>
+  <li>行内代码用反引号：<code class="language-plaintext highlighter-rouge">site.data.navigation.main</code></li>
+  <li><strong>粗体</strong> 和 <em>斜体</em> 和 <strong><em>粗斜</em></strong></li>
+  <li><del>删除线</del> 和 ==标记==</li>
+</ul>
+
+<h3 id="3-链接">3. 链接</h3>
+
+<ul>
+  <li>站内链接：<code class="language-plaintext highlighter-rouge">[/about/](/about/)</code></li>
+  <li>站内文章：<code class="language-plaintext highlighter-rouge">[welcome](/posts/2026/06/03/welcome/)</code></li>
+  <li>外链：<a href="https://github.com/mmistakes/minimal-mistakes">Minimal Mistakes</a> — 自动加 ↗ 小图标</li>
+</ul>
+
+<h3 id="4-列表">4. 列表</h3>
+
+<p>无序：</p>
+<ul>
+  <li>第一项</li>
+  <li>第二项
+    <ul>
+      <li>嵌套</li>
+      <li>再嵌套</li>
+    </ul>
+  </li>
+</ul>
+
+<p>有序：</p>
+<ol>
+  <li>第一步</li>
+  <li>第二步</li>
+  <li>第三步</li>
+</ol>
+
+<p>任务列表：</p>
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />待办事项</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />已完成</li>
+</ul>
+
+<h3 id="5-mermaid-图">5. Mermaid 图</h3>
+
+<pre><code class="language-mermaid">graph LR
+  A[写文章] --&gt; B{类型?}
+  B -- 技术 --&gt; C[代码 + 解释]
+  B -- 笔记 --&gt; D[链接 + 摘录]
+  C --&gt; E[发布]
+  D --&gt; E
+</code></pre>
+
+<h3 id="6-latex-行内与块">6. LaTeX 行内与块</h3>
+
+<p>行内：勾股定理 $a^2 + b^2 = c^2$。</p>
+
+<p>块：</p>
+
+\[\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}\]
+
+<h3 id="7-表格">7. 表格</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>类别</th>
+      <th>例子</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>编程语言</td>
+      <td>TypeScript / Python / Go</td>
+    </tr>
+    <tr>
+      <td>数据库</td>
+      <td>PostgreSQL / Redis</td>
+    </tr>
+    <tr>
+      <td>工具链</td>
+      <td>Docker / GitHub Actions</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="8-图片">8. 图片</h3>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="p">![</span><span class="nv">图片描述</span><span class="p">](</span><span class="sx">/assets/images/avatar.png</span><span class="p">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>把图片文件放到 <code class="language-plaintext highlighter-rouge">assets/images/</code> 下，引用即可。MM dark 主题会自动给图片加一点圆角阴影。</p>
+
+<h3 id="9-提示与折叠">9. 提示与折叠</h3>
+
+<blockquote>
+  <p>[!NOTE]
+提示类（NOTE）：MM 不内置 admonition，要用这类需要装 jekyll admonitions 插件或自己写 include。</p>
+</blockquote>
+
+<details>
+  <summary>点击展开更多</summary>
+
+  <p>这是折叠内容。MM 默认不开启 <code class="language-plaintext highlighter-rouge">&lt;details&gt;</code> 高亮，但你 <code class="language-plaintext highlighter-rouge">&lt;summary&gt;</code> 会被识别。</p>
+
+</details>
+
+<h3 id="10-表情">10. 表情</h3>
+
+<p>:rocket: :coffee: :sparkles:</p>
+
+<hr />
+
+<h2 id="收尾">收尾</h2>
+
+<p>写完后的步骤：</p>
+
+<ol>
+  <li>把这个文件 <code class="language-plaintext highlighter-rouge">cp _posts/2026-07-06-post-template.md _posts/$(date +%Y-%m-%d)-your-title.md</code></li>
+  <li>改 frontmatter 的 <code class="language-plaintext highlighter-rouge">title</code> / <code class="language-plaintext highlighter-rouge">date</code> / <code class="language-plaintext highlighter-rouge">categories</code> / <code class="language-plaintext highlighter-rouge">tags</code></li>
+  <li>正文替换为你的真实内容</li>
+  <li><code class="language-plaintext highlighter-rouge">git add &amp;&amp; git commit &amp;&amp; git push</code></li>
+  <li>等 1–2 分钟 GH Pages 部署完成，刷 <code class="language-plaintext highlighter-rouge">https://hello28256.github.io/</code></li>
+</ol>
+
+<blockquote>
+  <p>⚠️ 别把 “date” 写成未来时间，否则 jekyll 会在 publish-on 模式下不渲染。直接删这个模板的”date”。</p>
+</blockquote>]]></content><author><name>hello28256</name></author><category term="Journal" /><category term="tag1" /><category term="tag2" /><summary type="html"><![CDATA[一句话摘要（会进 og:description / SEO）]]></summary></entry><entry><title type="html">你好，世界</title><link href="https://hello28256.github.io/posts/2026/06/03/welcome/" rel="alternate" type="text/html" title="你好，世界" /><published>2026-06-03T09:00:00+08:00</published><updated>2026-07-05T23:26:37+08:00</updated><id>https://hello28256.github.io/posts/2026/06/03/welcome</id><content type="html" xml:base="https://hello28256.github.io/posts/2026/06/03/welcome/"><![CDATA[<h2 id="这个站点是怎么来的">这个站点是怎么来的</h2>
+
+<p>经过半天折腾，今天把个人主页 <code class="language-plaintext highlighter-rouge">hello28256.github.io</code> 搭起来了。</p>
+
+<p><strong>技术栈</strong>：</p>
+<ul>
+  <li>主站（你正在看的）：<a href="https://github.com/mmistakes/minimal-mistakes">Minimal Mistakes</a> (Jekyll) — aqua 皮肤</li>
+  <li>书：<a href="https://vitepress.dev/">VitePress</a> 部署在 <code class="language-plaintext highlighter-rouge">/book/</code> 子路径</li>
+</ul>
+
+<p><strong>这里会有什么内容</strong>：</p>
+<ul>
+  <li>📝 技术博客（这一栏）</li>
+  <li>👤 <a href="/about/">关于我</a></li>
+  <li>⌨️ <a href="https://hello28256.github.io/Coding/1001Coding/">Coding</a></li>
+  <li>📚 <a href="https://hello28256.github.io/book/">我的阅读</a></li>
+</ul>
+
+<h2 id="阅读与写作计划">阅读与写作计划</h2>
+
+<pre><code class="language-mermaid">gantt
+    title 2026 阅读与写作计划
+    dateFormat YYYY-MM-DD
+    section 博客
+    每周一篇技术总结  :active, 2026-06-01, 180d
+    section 阅读笔记
+    第 1 则 引言     :done, 2026-06-01, 7d
+    第 2 则 起步     :active, 2026-06-08, 14d
+    第 3 则 进阶     :2026-06-22, 30d
+</code></pre>
+
+<h2 id="关于这个主题">关于这个主题</h2>
+
+<p><a href="https://mmistakes.github.io/minimal-mistakes/">Minimal Mistakes</a> 是我见过的最灵活的双栏 Jekyll 主题：</p>
+
+<ul>
+  <li>内置 11 种皮肤（含 aqua、neon、mint 等）</li>
+  <li>splash / single / archive / sidebar 四套布局</li>
+  <li>代码块、LaTeX 全支持</li>
+  <li>移动端体验不错</li>
+</ul>
+
+<blockquote>
+  <p>第一次写 Jekyll 博客，如果有什么不对的地方，欢迎在 <a href="https://github.com/hello28256/hello28256.github.io/issues">GitHub Issues</a> 提出。</p>
+</blockquote>]]></content><author><name>hello28256</name><email>hello28256@gmail.com</email></author><category term="Journal" /><category term="introduction" /><category term="jekyll" /><category term="minimal-mistakes" /><summary type="html"><![CDATA[这是我个人主页的第一篇博客，记录搭建过程和后续计划。]]></summary></entry></feed>
