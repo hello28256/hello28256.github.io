@@ -107,12 +107,12 @@ html {
    不用 sticky 是因为 sticky 依赖最近可滚动祖先是 viewport——本站有
    各种 overflow:visible/auto 容器干扰，fixed 更稳。
    masthead 改 sticky (d2b86c8) 后**永远钉 viewport 顶 0**：
-   其高度 = masthead__inner-wrap padding 1em + 内容（logo + site-title
-   + 主题切换按钮 26px + 1px border）≈ 13em (18px 根字号下)。
-   14em 仍被 masthead 底边线切到。top:16em 留 3em 间距。 */
+   其高度 ≈ 13em (18px 根字号下)。
+   之前 top:16em 留 3em 间距，用户觉得 TOC 离顶部仍太近，再往下挪 4em
+   到 top:20em，让 TOC 视觉上更靠近文章区头部、跟正文节奏更对齐。 */
 .sidebar__right {
   position: fixed !important;
-  top: 16em;
+  top: 20em;
   right: 1em;
   align-self: flex-start;
   margin: 0 !important;
@@ -124,7 +124,7 @@ html {
   z-index: 10;
   overflow-wrap: break-word;
   float: none !important;
-  max-height: calc(100vh - 17em);
+  max-height: calc(100vh - 21em);
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
