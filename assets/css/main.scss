@@ -57,13 +57,17 @@ html {
     gap: 2em; /* TOC 和文章之间 2em 间距，更透气 */
   }
 
-  /* 2. 文章区：flex: 1 占满剩余宽度；min-width: 0 防止长代码/长链接撑爆 */
+  /* 2. 文章区：flex: 1 占满剩余宽度；min-width: 0 防止长代码/长链接撑爆
+     max-width 720px 居中收窄（约 80 字符宽，阅读舒适），auto margin 居中 */
   .page__inner-wrap {
     flex: 1 1 auto !important;
     min-width: 0 !important;
     width: auto !important;
-    padding-left: 0 !important; /* 不再用 padding 留位，flex 已经处理 */
+    max-width: 720px !important;   /* 720px 阅读舒适宽度 */
     margin-top: 1em;
+    margin-left: auto !important;  /* flex 子项 + max-width + auto margin = 居中 */
+    margin-right: auto !important;
+    padding-left: 0 !important;
   }
 
   /* 3. 移动端：隐藏 TOC，文章占满 */
