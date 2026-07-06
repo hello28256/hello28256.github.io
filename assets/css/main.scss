@@ -224,8 +224,10 @@ html[data-theme="light"] .greedy-nav {
 html[data-theme="light"] .masthead__title,
 html[data-theme="light"] .masthead__menu-item,
 html[data-theme="light"] .greedy-nav a,
-html[data-theme="light"] .greedy-nav .visible-links a {
-  color: var(--mm-masthead-text);
+html[data-theme="light"] .greedy-nav .visible-links a,
+html[data-theme="light"] .site-title,
+html[data-theme="light"] .site-subtitle {
+  color: var(--mm-link); /* light 模式顶部也用主题色，跟 dark 模式统一 */
 }
 html[data-theme="light"] .page__content a,
 html[data-theme="light"] a {
