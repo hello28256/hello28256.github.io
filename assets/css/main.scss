@@ -36,86 +36,69 @@ html {
    右侧；.toc 有青色标题块 + 描边。覆盖为左侧定位、纯文字列表，
    视觉上跟顶部导航一致。
    ---------------------------------------------------------------------------- */
-.sidebar__right {
-  position: relative;
-  inset-inline-start: 0;
-  inset-inline-end: auto;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  padding-inline-start: 0;
-  padding-inline-end: 0;
-  margin-bottom: 1em;
-  width: 100%;
+/* ============================================================================
+   文章页布局：flex 双列（TOC 固定宽 + 文章 flex:1）
+   之前用 absolute 定位 + padding-left 200px 避开 TOC，但 absolute 让
+   TOC 脱流，文章内容如果换行宽度超过 padding 就漏到 TOC 上方。
+   改用 flex 让 TOC 真正"占位"在文档流里。
+   ============================================================================ */
 
-  @include breakpoint($medium) {
-    position: absolute;
-    top: 0;
-    inset-inline-start: 0;
-    inset-inline-end: auto;
-    /* 267px / 2 = 134px */
-    width: 134px;
-    margin-inline-start: 0;
-    padding-inline-end: 0.5em;
-    z-index: 10;
-  }
-
-  @include breakpoint($large) {
-    /* 400px / 2 = 200px */
-    width: 200px;
-    margin-inline-start: 0;
-  }
-
-  &.sticky {
-    @include breakpoint($medium) {
-      position: absolute;
-    }
-  }
-}
-
-/* 文章页内容区沾满宽度：去掉 mm 主题在 .page 上预留的 200px / 300px
-   （给 TOC 用的宽度），让正文用满整宽。TOC 仍用 absolute 定位贴在
-   .page 容器内左缘——这需要 .page 是 position:relative，让 sidebar__right
-   的 absolute 相对 .page 而非 viewport 定位。
-
-   .page margin-left: 0 让 .page 紧贴屏幕左缘（0-100%）；
-   .page__inner-wrap padding-left: 200px 把文章内容从 TOC 右边开始，
-   视觉上文章占 0-100% 满宽，但实际文字从屏幕 200px 起（避开 TOC）。 */
+/* 1. .page 改为 flex 容器，TOC 占左侧固定宽，文章占右侧自适应 */
 .layout--single {
   .page {
-    position: relative; /* 让 sidebar__right 的 absolute 相对 .page 定位 */
-    margin-left: 0;
+    display: flex !important;
+    flex-direction: row;
+    align-items: flex-start;
+    position: relative; /* 给 sidebar__right sticky 提供定位祖先 */
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    padding-inline-end: 0 !important;
+    gap: 1.5em; /* TOC 和文章之间 1.5em 间距 */
   }
+
+  /* 2. 文章区：flex: 1 占满剩余宽度；min-width: 0 防止长代码/长链接撑爆 */
   .page__inner-wrap {
-    padding-left: 200px; /* 避开 absolute 定位的 TOC（200px 宽） */
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+    padding-left: 0 !important; /* 不再用 padding 留位，flex 已经处理 */
+    margin-top: 1em;
   }
-  @include breakpoint($large) {
+
+  /* 3. 移动端：隐藏 TOC，文章占满 */
+  @media (max-width: 63.9375em) { /* < 1024px = mm 的 medium 断点之下 */
     .page {
-      width: 100% !important;
-      padding-inline-end: 0 !important;
-      margin-left: 0 !important;
+      flex-direction: column;
+      gap: 0;
+    }
+    .sidebar__right {
+      display: none !important;
     }
     .page__inner-wrap {
-      padding-left: 200px; /* large 断点 TOC 还是 200px（$right-sidebar-width-narrow） */
-    }
-  }
-  @include breakpoint($x-large) {
-    .page {
       width: 100% !important;
-      padding-inline-end: 0 !important;
-      margin-left: 0 !important;
-    }
-    .page__inner-wrap {
-      padding-left: 200px; /* x-large 也保持 200px 避开 TOC */
     }
   }
 }
 
-/* TOC 列表项之间去掉横线（mm 主题默认 border-bottom: 1px solid） */
-.toc__menu a {
-  border-bottom: 0 !important;
+/* 4. .sidebar__right：sticky + 固定宽，flex-shrink: 0 不被压缩 */
+.sidebar__right {
+  position: sticky;
+  top: 0;             /* 滚动时贴顶 */
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  width: 200px;        /* 固定宽，跟之前一样 */
+  background: transparent; /* 不遮挡文章（你要求背景不透明或半透明不挡阅读） */
+  z-index: 10;          /* 滚动时保持在文章之上 */
+  overflow-wrap: break-word;
+
+  /* 移动端隐藏（flex-direction: column 之后 TOC 还在文档流顶，
+     上面 @media (max-width: 63.9375em) 用 display:none 隐藏） */
 }
 
-/* TOC 内容强制在 sidebar__right 宽度内换行（不溢出到文章区） */
+/* 5. TOC 列表内容强制在 200px 内换行（不溢出） */
 .toc,
 .toc__menu {
   max-width: 100%;
@@ -123,6 +106,7 @@ html {
   word-break: break-word;
 }
 
+/* 6. 去掉 mm 主题给 TOC 加的青色标题块和边框（保持简洁） */
 .sidebar__right .toc {
   background: transparent;
   border: 0;
@@ -142,6 +126,11 @@ html {
     font-weight: bold;
     letter-spacing: 0.02em;
   }
+}
+
+/* 7. TOC 列表项之间去掉横线（mm 主题默认 border-bottom: 1px solid） */
+.toc__menu a {
+  border-bottom: 0 !important;
 }
 
 /* ----------------------------------------------------------------------------
