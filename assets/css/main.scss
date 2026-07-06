@@ -141,15 +141,16 @@ html[data-theme="dark"] {
   height: 1.7rem;
   margin-left: 0.75rem;
   padding: 0;
-  background: var(--mm-border);
-  border: 0;
+  background: var(--mm-text-muted);
+  border: 1px solid var(--mm-border);
   border-radius: 999px;
   cursor: pointer;
   vertical-align: middle;
-  transition: background 0.25s ease;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
 .theme-toggle:hover {
-  background: var(--mm-text-muted);
+  background: var(--mm-link);
+  border-color: var(--mm-link);
 }
 .theme-toggle__slider {
   position: absolute;
