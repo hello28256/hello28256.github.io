@@ -37,13 +37,18 @@ html {
    视觉上跟顶部导航一致。
    ---------------------------------------------------------------------------- */
 /* ============================================================================
-   文章页布局：flex 双列（TOC 固定宽 + 文章 flex:1）
-   之前用 absolute 定位 + padding-left 200px 避开 TOC，但 absolute 让
-   TOC 脱流，文章内容如果换行宽度超过 padding 就漏到 TOC 上方。
-   改用 flex 让 TOC 真正"占位"在文档流里。
+   文章页布局：flex 双列（左文章 + 右 TOC，整体居中）
+   仿照 /book (VitePress) 的 VPDoc 三列结构：左 nav + 中文章 + 右 outline。
+   本站无左 nav，所以是 "中文章 + 右 TOC" 两列靠左对齐到 #main 中心。
+   - TOC 已从 page__content 内提到 .page 直接子级（见 _layouts/single.html），
+     这样 .page flex 布局才能把 TOC 和 page__inner-wrap 当平级子项处理。
+   - mm 主题默认 .page { width: calc(100% - 240px); padding-inline-end: 240px }
+     是为了 "让位给右侧浮着的 TOC"。没左 sidebar 时这让文章被强制左移 240px，
+     整个页面垮掉（你说"右 TOC 飘着 + 左右空 + 中间不居中"就是这个原因）。
+     覆盖掉 .page 的 width/padding，让 .page 撑满 #main，由内部 flex 控布局。
    ============================================================================ */
 
-/* 1. .page 改为 flex 容器，TOC 占左侧固定宽，文章占右侧自适应 */
+/* 1. .page 改为 flex 容器，TOC order:2 排到右，文章 order:1 排到左 */
 .layout--single {
   .page {
     display: flex !important;
@@ -53,19 +58,22 @@ html {
     width: 100% !important;
     max-width: 100% !important;
     margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-inline-start: 0 !important;
     padding-inline-end: 0 !important;
     gap: 2em; /* TOC 和文章之间 2em 间距，更透气 */
   }
 
-  /* 2. 文章区：flex: 1 占满剩余宽度；min-width: 0 防止长代码/长链接撑爆
-     max-width 720px 居中收窄（约 80 字符宽，阅读舒适），auto margin 居中 */
+  /* 2. 文章区：order:1 排左，flex: 1 占满剩余宽度
+     max-width 720px 居中收窄（~80 字符宽，阅读舒适） */
   .page__inner-wrap {
+    order: 1;
     flex: 1 1 auto !important;
     min-width: 0 !important;
     width: auto !important;
-    max-width: 720px !important;   /* 720px 阅读舒适宽度 */
+    max-width: 720px !important;
     margin-top: 1em;
-    margin-left: auto !important;  /* flex 子项 + max-width + auto margin = 居中 */
+    margin-left: auto !important;
     margin-right: auto !important;
     padding-left: 0 !important;
   }
@@ -85,18 +93,20 @@ html {
   }
 }
 
-/* 4. .sidebar__right：sticky + 固定宽，flex-shrink: 0 不被压缩
-   用 !important 覆盖 mm 主题 @media (min-width: 64em) 里
-   的 position:absolute + inset-inline-end:0 + margin-inline-end:-200px
+/* 4. .sidebar__right：order:2 排右，sticky + 固定宽 240px，flex-shrink: 0
+   覆盖 mm 主题 @media (min-width: 64em) 里
+   position:absolute + inset-inline-end:0 + margin-inline-end:-200px
    （这些让 sidebar 脱流、推到 viewport 右边） */
 .sidebar__right {
+  order: 2;
   position: sticky !important;
   top: 0;
-  inset-inline-start: 0 !important;
-  inset-inline-end: auto !important;
+  inset-inline-start: auto !important;
+  inset-inline-end: 0 !important;
   align-self: flex-start;
   flex-shrink: 0;
   margin: 0 !important;
+  margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
   padding: 0;
   width: 240px !important;
