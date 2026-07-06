@@ -90,3 +90,149 @@ html {
     letter-spacing: 0.02em;
   }
 }
+
+/* ----------------------------------------------------------------------------
+   主题切换：白天 / 暗色（CSS 变量 + data-theme）
+   minimal-mistakes 的皮肤是构建时确定的；要做运行时切换，在 :root
+   上定义两套 CSS 变量，再用 var() 覆盖核心元素的颜色。注意：只在
+   <html data-theme="..."> 匹配时覆盖，避免破坏主题皮肤机制。
+   ---------------------------------------------------------------------------- */
+:root {
+  --mm-bg: #ffffff;
+  --mm-text: #3d4144;
+  --mm-text-muted: #7a8288;
+  --mm-link: #2a7ae2;
+  --mm-link-hover: #1756a9;
+  --mm-border: #bdc1c4;
+  --mm-masthead-bg: #ffffff;
+  --mm-masthead-text: #3d4144;
+  --mm-code-bg: #f3f6fa;
+  --mm-code-text: #567482;
+  --mm-footer-bg: #f5f5f5;
+  --mm-page-bg: #ffffff;
+  --mm-rule: #bdc1c4;
+  --mm-input-bg: #fff;
+  --mm-table-stripe: #f7f7f7;
+}
+
+html[data-theme="dark"] {
+  --mm-bg: #252a34;
+  --mm-text: #eaeaea;
+  --mm-text-muted: #9ba1ad;
+  --mm-link: #00adb5;
+  --mm-link-hover: #66d3d9;
+  --mm-border: mix(#fff, #252a34, 20%);
+  --mm-masthead-bg: #252a34;
+  --mm-masthead-text: #eaeaea;
+  --mm-code-bg: mix(#000, #252a34, 15%);
+  --mm-code-text: #eaeaea;
+  --mm-footer-bg: mix(#000, #252a34, 30%);
+  --mm-page-bg: #252a34;
+  --mm-rule: mix(#fff, #252a34, 20%);
+  --mm-input-bg: mix(#000, #252a34, 15%);
+  --mm-table-stripe: mix(#000, #252a34, 8%);
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-left: 0.5rem;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--mm-border);
+  border-radius: 4px;
+  color: var(--mm-masthead-text);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: color 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover {
+  color: var(--mm-link);
+  border-color: var(--mm-link);
+}
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  display: none;
+}
+html[data-theme="dark"] .theme-toggle .icon-sun { display: inline; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: inline; }
+html:not([data-theme]) .theme-toggle .icon-moon { display: inline; }
+
+/* 颜色覆盖（仅在 data-theme 显式设置时生效） */
+html[data-theme="light"] {
+  background-color: var(--mm-page-bg);
+}
+html[data-theme="light"] body {
+  color: var(--mm-text);
+  background-color: var(--mm-bg);
+}
+html[data-theme="light"] .masthead,
+html[data-theme="light"] .greedy-nav {
+  background-color: var(--mm-masthead-bg);
+}
+html[data-theme="light"] .masthead__title,
+html[data-theme="light"] .masthead__menu-item,
+html[data-theme="light"] .greedy-nav a,
+html[data-theme="light"] .greedy-nav .visible-links a {
+  color: var(--mm-masthead-text);
+}
+html[data-theme="light"] .page__content a,
+html[data-theme="light"] a {
+  color: var(--mm-link);
+}
+html[data-theme="light"] .page__content a:hover,
+html[data-theme="light"] a:hover {
+  color: var(--mm-link-hover);
+}
+html[data-theme="light"] .page__content,
+html[data-theme="light"] .page__content h1,
+html[data-theme="light"] .page__content h2,
+html[data-theme="light"] .page__content h3,
+html[data-theme="light"] .page__content h4 {
+  color: var(--mm-text);
+}
+html[data-theme="light"] .page__content hr,
+html[data-theme="light"] .page__footer {
+  border-color: var(--mm-rule);
+  color: var(--mm-text-muted);
+}
+html[data-theme="light"] .page__footer {
+  background-color: var(--mm-footer-bg);
+}
+html[data-theme="light"] code,
+html[data-theme="light"] pre {
+  background-color: var(--mm-code-bg);
+  color: var(--mm-code-text);
+  border-color: var(--mm-border);
+}
+html[data-theme="light"] .sidebar__right .toc { color: var(--mm-text); }
+html[data-theme="light"] .sidebar__right .toc a { color: var(--mm-link); }
+html[data-theme="light"] .toc__menu a { color: var(--mm-text-muted); }
+html[data-theme="light"] .toc__menu a:hover,
+html[data-theme="light"] .toc__menu .active a { color: var(--mm-link); }
+html[data-theme="light"] input,
+html[data-theme="light"] textarea {
+  background-color: var(--mm-input-bg);
+  color: var(--mm-text);
+  border-color: var(--mm-border);
+}
+html[data-theme="light"] table th { background-color: var(--mm-table-stripe); }
+html[data-theme="light"] .btn { color: var(--mm-text); border-color: var(--mm-border); }
+
+html[data-theme="dark"] body { color: var(--mm-text); }
+html[data-theme="dark"] a,
+html[data-theme="dark"] .page__content a { color: var(--mm-link); }
+html[data-theme="dark"] a:hover,
+html[data-theme="dark"] .page__content a:hover { color: var(--mm-link-hover); }
+
+/* 防止主题切换闪烁（FOUC）：html 无 data-theme 时强制显示 dark 主题色，
+   跟 _config.yml 当前 minimal_mistakes_skin: dark 一致 */
+html:not([data-theme]) {
+  background-color: #252a34;
+}
+html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
