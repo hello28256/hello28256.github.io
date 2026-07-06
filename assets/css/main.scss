@@ -11,22 +11,22 @@ search: false
 /* ----------------------------------------------------------------------------
    全站字号缩放覆盖
    主题默认 html { font-size: 16px / 18px / 20px / 22px（按断点） }，
-   所有 rem 基于此缩放。把根字号缩为 80%，使正文/标题/导航等同步缩小 20%。
+   所有 rem 基于此缩放。把根字号缩为 90%，使正文/标题/导航等同步缩小 10%。
    用 !important 覆盖主题内联在 _reset.scss 的样式。
    ---------------------------------------------------------------------------- */
 html {
-  font-size: 12.8px !important; // 16 * 0.8
+  font-size: 14.4px !important; // 16 * 0.9
 
   @include breakpoint($medium) {
-    font-size: 14.4px !important; // 18 * 0.8
+    font-size: 16.2px !important; // 18 * 0.9
   }
 
   @include breakpoint($large) {
-    font-size: 16px !important; // 20 * 0.8
+    font-size: 18px !important; // 20 * 0.9
   }
 
   @include breakpoint($x-large) {
-    font-size: 17.6px !important; // 22 * 0.8
+    font-size: 19.8px !important; // 22 * 0.9
   }
 }
 
@@ -302,3 +302,14 @@ html:not([data-theme]) {
   background-color: #252a34;
 }
 html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
+
+/* ----------------------------------------------------------------------------
+   文章页字号局部缩放
+   根 html font-size 14.4px 影响所有 rem 元素（包括 masthead/TOC），
+   改这里不动根字号，只让 .page__content 内的标题/正文/列表缩小。
+   注意：mm 主题 h1-h6 字号用 rem，所以 .page__content font-size 一改，
+   它们会按比例缩。footer、code 块不在这容器内不受影响。
+   ---------------------------------------------------------------------------- */
+.page__content {
+  font-size: 0.85rem; /* 正文 14.4 * 0.85 ≈ 12.2px；标题按 rem 同比缩 */
+}
