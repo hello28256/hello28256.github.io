@@ -175,9 +175,12 @@ html[data-theme="dark"] {
 .theme-toggle .icon-sun,
 .theme-toggle .icon-moon {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 0.75rem;  /* 12px */
   height: 0.75rem;
-  color: #8e8e93; /* iOS 关态图标灰 */
+  color: #8e8e93; /* iOS 关态图标灰（在白底滑块上可见） */
   transition: opacity 0.25s ease, color 0.25s ease;
   user-select: none;
 }
@@ -199,9 +202,11 @@ html[data-theme="dark"] .theme-toggle__slider {
 }
 html[data-theme="dark"] .theme-toggle .icon-sun { opacity: 0; }
 html[data-theme="dark"] .theme-toggle .icon-moon { opacity: 1; }
+/* dark 模式下图标仍是深色——因为滑块本身仍是白色，
+   滑块在胶囊上的位置体现"开了"，图标颜色不跟随胶囊色 */
 html[data-theme="dark"] .theme-toggle .icon-moon,
 html[data-theme="dark"] .theme-toggle .icon-sun {
-  color: #fff; /* dark 模式下图标反白 */
+  color: #6e6e73; /* 深一点的灰，dark 模式下滑块白底仍清晰 */
 }
 
 /* 颜色覆盖（仅在 data-theme 显式设置时生效） */
