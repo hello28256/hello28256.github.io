@@ -53,16 +53,14 @@ html {
     inset-inline-start: 0;
     inset-inline-end: auto;
     width: $right-sidebar-width-narrow;
-    /* 负边距从 -(200+1em) 改为 -(200+0.5em)：缩小与 page 左缘的缝隙，
-       让 TOC 与 .page 内容更紧凑 */
-    margin-inline-start: calc(-1 * (#{$right-sidebar-width-narrow} + 0.5em));
-    padding-inline-end: 0.5em;
+    margin-inline-start: 0;          /* 0 即可：.page 是 position:relative，TOC 浮在容器内左缘 */
+    padding-inline-end: 0.5em;        /* 与 .page 内容留 0.5em 缝 */
     z-index: 10;
   }
 
   @include breakpoint($large) {
     width: $right-sidebar-width;
-    margin-inline-start: calc(-1 * (#{$right-sidebar-width} + 0.5em));
+    margin-inline-start: 0;
   }
 
   &.sticky {
@@ -73,9 +71,13 @@ html {
 }
 
 /* 文章页内容区沾满宽度：去掉 mm 主题在 .page 上预留的 200px / 300px
-   （给 TOC 用的宽度），让正文用满整宽。TOC 仍用 absolute 定位贴在左缘。
-   用 !important 覆盖主题在 @media 80em 里更靠后的规则。 */
+   （给 TOC 用的宽度），让正文用满整宽。TOC 仍用 absolute 定位贴在
+   .page 容器内左缘——这需要 .page 是 position:relative，让 sidebar__right
+   的 absolute 相对 .page 而非 viewport 定位。 */
 .layout--single {
+  .page {
+    position: relative; /* 让 sidebar__right 的 absolute 相对 .page 定位 */
+  }
   @include breakpoint($large) {
     .page {
       width: 100% !important;
