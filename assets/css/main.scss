@@ -73,14 +73,26 @@ html {
 }
 
 /* 文章页内容区沾满宽度：去掉 mm 主题在 .page 上预留的 200px / 300px
-   （给 TOC 用的宽度），让正文用满整宽。TOC 仍用 absolute 定位贴在左缘。 */
+   （给 TOC 用的宽度），让正文用满整宽。TOC 仍用 absolute 定位贴在左缘。
+   用 !important 覆盖主题在 @media 80em 里更靠后的规则。 */
 .layout--single {
   @include breakpoint($large) {
     .page {
-      width: 100%;
-      padding-inline-end: 0;
+      width: 100% !important;
+      padding-inline-end: 0 !important;
     }
   }
+  @include breakpoint($x-large) {
+    .page {
+      width: 100% !important;
+      padding-inline-end: 0 !important;
+    }
+  }
+}
+
+/* TOC 列表项之间去掉横线（mm 主题默认 border-bottom: 1px solid） */
+.toc__menu a {
+  border-bottom: 0 !important;
 }
 
 .sidebar__right .toc {
