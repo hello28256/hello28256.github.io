@@ -52,21 +52,17 @@ html {
     top: 0;
     inset-inline-start: 0;
     inset-inline-end: auto;
-    width: $right-sidebar-width-narrow;
-    margin-inline-start: 0;          /* 0 即可：.page 是 position:relative，TOC 浮在容器内左缘 */
-    padding-inline-end: 0.5em;        /* 与 .page 内容留 0.5em 缝 */
+    /* 物理上只用左 3/4 宽：右 1/4 不存在。
+       75% 算式 = 父容器 .page 宽度的 0.75。 */
+    width: 75%;
+    margin-inline-start: 0;
+    padding-inline-end: 0;
     z-index: 10;
-    /* 视觉上右 1/4 渐隐到透明（不删除内容，只改可见性）。
-       -webkit-mask-image 是 Safari/Chrome 前缀；不加 -webkit- 在部分 Safari 不生效 */
-    -webkit-mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
-    mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
   }
 
   @include breakpoint($large) {
-    width: $right-sidebar-width;
+    width: 75%;
     margin-inline-start: 0;
-    -webkit-mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
-    mask-image: linear-gradient(to right, black 0%, black 75%, transparent 100%);
   }
 
   &.sticky {
