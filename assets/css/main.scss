@@ -101,8 +101,8 @@ html {
   --mm-bg: #ffffff;
   --mm-text: #3d4144;
   --mm-text-muted: #7a8288;
-  --mm-link: #00adb5; /* 跟 dark 主题统一主题色 */
-  --mm-link-hover: #1756a9;
+  --mm-link: #00c853; /* 跟 /book 子站 VitePress 品牌色统一 */
+  --mm-link-hover: #00a344; /* VitePress --vp-c-brand-3 */
   --mm-border: #bdc1c4;
   --mm-masthead-bg: #ffffff;
   --mm-masthead-text: #3d4144;
@@ -119,8 +119,8 @@ html[data-theme="dark"] {
   --mm-bg: #252a34;
   --mm-text: #eaeaea;
   --mm-text-muted: #9ba1ad;
-  --mm-link: #00adb5;
-  --mm-link-hover: #66d3d9;
+  --mm-link: #00e676; /* 跟 /book VitePress 暗模式品牌色统一 */
+  --mm-link-hover: #66eb91;
   --mm-border: mix(#fff, #252a34, 20%);
   --mm-masthead-bg: #252a34;
   --mm-masthead-text: #eaeaea;
