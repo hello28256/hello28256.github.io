@@ -61,6 +61,7 @@ defaults:
       share : true
       related: true
       toc   : true
+      toc_sticky: true
       author_profile: false
       read_time    : true
       permalink    : /posts/:year/:month/:day/:title/

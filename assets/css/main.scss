@@ -48,20 +48,18 @@ html {
      覆盖掉 .page 的 width/padding，让 .page 撑满 #main，由内部 flex 控布局。
    ============================================================================ */
 
-/* 1. .page 改为 flex 容器，justify-content:center 让文章在 #main 居中
-   - 文章用 flex 固定 720px + margin:auto 居中
-   - TOC 用 position:absolute 钉右边，**不参与 flex 空间分配**，
-     这样文章区不会因为 flex 占比计算被推到一边
-   这就是上一版的问题：flex:1 + max-width:720px + margin:auto，
-   flex 子项会先按 flex:1 比例吃掉剩余空间再 max-width 截断，
-   不会真正居中。 */
+/* ============================================================================
+   文章页布局：左文章居中 + 右 TOC sticky（仿 /book VPDoc）
+   - .page 是 block 容器（不是 flex），文章 720px 用 margin:0 auto 居中
+   - .sidebar__right 改 position:sticky，**不参与 flex 空间分配**，
+     下滚时钉到 viewport 顶部（mm 主题自带的 Gumshoe scrollspy 会自动
+     高亮当前章节 .active）
+   - 这是为了解决"文章下翻时 TOC 跟着滚走"的问题
+   ============================================================================ */
 .layout--single {
   .page {
-    display: flex !important;
-    flex-direction: row;
-    justify-content: center; /* 文章区在 .page 里水平居中 */
-    align-items: flex-start;
-    position: relative; /* 给 sidebar__right absolute 提供定位祖先 */
+    position: relative; /* sticky 的定位祖先（fallback） */
+    display: block !important;
     width: 100% !important;
     max-width: 100% !important;
     margin-left: 0 !important;
@@ -70,10 +68,8 @@ html {
     padding-inline-end: 0 !important;
   }
 
-  /* 2. 文章区：固定 720px，flex 0 0 720px（不 grow/shrink），margin auto 居中 */
+  /* 文章区：720px 居中（margin auto 是经典 block 居中） */
   .page__inner-wrap {
-    order: 1;
-    flex: 0 0 720px !important; /* 固定 720px，不参与剩余空间分配 */
     width: 720px !important;
     max-width: 720px !important;
     min-width: 0 !important;
@@ -83,32 +79,33 @@ html {
     padding-left: 0 !important;
   }
 
-  /* 3. 移动端：隐藏 TOC，文章占满 */
+  /* 移动端：隐藏 TOC，文章占满 */
   @media (max-width: 63.9375em) { /* < 1024px = mm 的 medium 断点之下 */
-    .page {
-      flex-direction: column;
-    }
     .sidebar__right {
       display: none !important;
     }
     .page__inner-wrap {
-      flex: 0 0 100% !important;
       width: 100% !important;
     }
   }
 }
 
-/* 4. .sidebar__right：position:absolute 钉右边（**不参与 flex 空间分配**），
-   240px + sticky。绝对定位基于 .page (relative)。
-   覆盖 mm 主题 @media (min-width: 64em) 里
-   position:absolute + inset-inline-end:0 + margin-inline-end:-200px
-   （这些让 sidebar 脱流但用负 margin 偏移到 viewport 右边，文章区不居中） */
+/* .sidebar__right：position:fixed 钉到 viewport 右上角
+   解决"下翻时 TOC 跟着滚走"的问题。
+   fixed 元素不受任何祖先滚动影响，永远在 viewport 右上角。
+   不用 sticky 是因为 sticky 依赖最近可滚动祖先是 viewport——本站有
+   各种 overflow:visible/auto 容器干扰，fixed 更稳。
+   right 用 calc：(100vw - #main max-width 1280px) / 2 + (1280 - 720 - 240) / 2 + 1em
+   = (100vw - 1280) / 2 + 160 + 1em
+   在 #main 满宽时 = 1em（小屏），在 #main 满到 1280px 时 = 1em + 160px
+   简化：直接 fixed + right: 1em + 一个适配规则 */
 .sidebar__right {
-  order: 2;
-  position: absolute !important;
-  top: 0;
-  inset-inline-end: 0 !important; /* 钉 .page 右边缘 */
+  position: fixed !important;
+  top: 5em;        /* 避开 masthead（masthead 大约 4em 高）+ 留 1em 间距 */
+  right: 1em;      /* viewport 右边留 1em 间距 */
+  align-self: flex-start;
   margin: 0 !important;
+  margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
   padding: 0;
   width: 240px !important;
@@ -116,6 +113,7 @@ html {
   z-index: 10;
   overflow-wrap: break-word;
   float: none !important;
+  max-height: calc(100vh - 6em);
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
@@ -183,12 +181,25 @@ html {
   }
 }
 
-/* 8. .toc__menu 列表：去掉项间 border、统一字号行高 */
+/* 8. .toc__menu 列表：去掉项间 border、统一字号行高、可滚动 */
 .toc__menu {
   list-style: none;
   margin: 0;
   padding: 0;
   font-size: 0.75rem;        /* 进一步缩到 0.75rem，更"侧边"感 */
+
+  /* 长目录在容器内滚动（仿 /book 的 VPDocAsideOutline）：
+     高度 = 100vh - masthead - nav 标题 - 留白 */
+  max-height: calc(100vh - 8em);
+  overflow-y: auto;
+
+  /* 隐藏滚动条但保留滚动能力（仿 book scrollbar-width:none） */
+  scrollbar-width: none;          /* Firefox */
+  &::-webkit-scrollbar {          /* Chrome/Safari/Edge */
+    display: none;
+    width: 0;
+    height: 0;
+  }
 
   a {
     display: block;
