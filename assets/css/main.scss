@@ -166,11 +166,11 @@ html {
     background: transparent !important;
     color: var(--mm-text-muted) !important;
     padding: 0 !important;
-    margin: 0;
+    margin: 0 0 0.25em 0;
     font-family: inherit;
-    font-size: 0.875rem;     /* 14px，仿 VitePress outline-title */
+    font-size: 0.85rem;      /* 跟正文 .page__content 字号一致 */
     font-weight: 600;
-    line-height: 32px;       /* 跟链接行高一致，对齐感强 */
+    line-height: 1.6;        /* 1.6 比例行高（跟正文一致），不写死 32px */
     letter-spacing: 0.01em;
     border-radius: 0;
     border-start-start-radius: 0;
@@ -188,12 +188,12 @@ html {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 0.875rem;       /* 14px，覆盖 mm $type-size-6/7 */
+  font-size: 0.85rem;        /* 跟正文 .page__content 字号一致 */
 
   a {
     display: block;
-    padding: 0;              /* 覆盖 mm 0.25rem 0.75rem；行高 32px 撑开 */
-    line-height: 32px;       /* 仿 VitePress outline-link */
+    padding: 0;
+    line-height: 1.6;         /* 跟正文一致 1.6 比例行高 */
     color: var(--mm-text-muted);
     font-weight: normal;     /* 覆盖 mm font-weight: bold */
     border-bottom: 0 !important;
@@ -233,7 +233,7 @@ html {
   left: -10px;              /* 略向左突出，跟 VitePress 一样 */
   transform: translateY(-50%);
   width: 2px;
-  height: 18px;
+  height: 1em;              /* 跟当前字号成比例，不写死 18px */
   background-color: var(--mm-link);
   border-radius: 2px;
   opacity: 1;               /* 默认显示；scrollspy 切 .active 时 marker 跟着切 */
