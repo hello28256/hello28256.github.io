@@ -172,14 +172,16 @@ html[data-theme="dark"] {
 .theme-toggle .icon-sun,
 .theme-toggle .icon-moon {
   position: absolute;
-  font-size: 0.65rem;
-  line-height: 1;
+  width: 0.7rem;
+  height: 0.7rem;
+  color: var(--mm-text); /* currentColor：让 stroke 跟随父色 */
+  transition: opacity 0.25s ease;
   user-select: none;
 }
-/* 暗色主题：滑块在左，显示月亮 */
-.theme-toggle .icon-sun { display: none; }
-.theme-toggle .icon-moon { display: inline; }
-/* 亮色主题：滑块在右（VitePress translate(18px)），显示太阳 */
+/* 暗色主题：滑块在左，显示月亮，太阳隐藏 */
+.theme-toggle .icon-sun { opacity: 0; }
+.theme-toggle .icon-moon { opacity: 1; }
+/* 亮色主题：滑块在右（VitePress translate），显示太阳 */
 html[data-theme="light"] .theme-toggle {
   background: var(--mm-text-muted);
 }
@@ -190,8 +192,8 @@ html[data-theme="light"] .theme-toggle__slider {
   transform: translate(1.1rem, -50%);
   background: #fff;
 }
-html[data-theme="light"] .theme-toggle .icon-sun { display: inline; }
-html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { opacity: 1; }
+html[data-theme="light"] .theme-toggle .icon-moon { opacity: 0; }
 
 /* 颜色覆盖（仅在 data-theme 显式设置时生效） */
 html[data-theme="light"] {
