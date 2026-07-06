@@ -168,7 +168,7 @@ html {
     padding: 0 !important;
     margin: 0 0 0.25em 0;
     font-family: inherit;
-    font-size: 0.85rem;      /* 跟正文 .page__content 字号一致 */
+    font-size: 0.75rem;      /* 进一步缩到 0.75rem，更"侧边"感 */
     font-weight: 600;
     line-height: 1.6;        /* 1.6 比例行高（跟正文一致），不写死 32px */
     letter-spacing: 0.01em;
@@ -188,7 +188,7 @@ html {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 0.85rem;        /* 跟正文 .page__content 字号一致 */
+  font-size: 0.75rem;        /* 进一步缩到 0.75rem，更"侧边"感 */
 
   a {
     display: block;
