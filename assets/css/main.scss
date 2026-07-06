@@ -48,30 +48,35 @@ html {
      覆盖掉 .page 的 width/padding，让 .page 撑满 #main，由内部 flex 控布局。
    ============================================================================ */
 
-/* 1. .page 改为 flex 容器，TOC order:2 排到右，文章 order:1 排到左 */
+/* 1. .page 改为 flex 容器，justify-content:center 让文章在 #main 居中
+   - 文章用 flex 固定 720px + margin:auto 居中
+   - TOC 用 position:absolute 钉右边，**不参与 flex 空间分配**，
+     这样文章区不会因为 flex 占比计算被推到一边
+   这就是上一版的问题：flex:1 + max-width:720px + margin:auto，
+   flex 子项会先按 flex:1 比例吃掉剩余空间再 max-width 截断，
+   不会真正居中。 */
 .layout--single {
   .page {
     display: flex !important;
     flex-direction: row;
+    justify-content: center; /* 文章区在 .page 里水平居中 */
     align-items: flex-start;
-    position: relative; /* 给 sidebar__right sticky 提供定位祖先 */
+    position: relative; /* 给 sidebar__right absolute 提供定位祖先 */
     width: 100% !important;
     max-width: 100% !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
     padding-inline-start: 0 !important;
     padding-inline-end: 0 !important;
-    gap: 2em; /* TOC 和文章之间 2em 间距，更透气 */
   }
 
-  /* 2. 文章区：order:1 排左，flex: 1 占满剩余宽度
-     max-width 720px 居中收窄（~80 字符宽，阅读舒适） */
+  /* 2. 文章区：固定 720px，flex 0 0 720px（不 grow/shrink），margin auto 居中 */
   .page__inner-wrap {
     order: 1;
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    width: auto !important;
+    flex: 0 0 720px !important; /* 固定 720px，不参与剩余空间分配 */
+    width: 720px !important;
     max-width: 720px !important;
+    min-width: 0 !important;
     margin-top: 1em;
     margin-left: auto !important;
     margin-right: auto !important;
@@ -82,31 +87,28 @@ html {
   @media (max-width: 63.9375em) { /* < 1024px = mm 的 medium 断点之下 */
     .page {
       flex-direction: column;
-      gap: 0;
     }
     .sidebar__right {
       display: none !important;
     }
     .page__inner-wrap {
+      flex: 0 0 100% !important;
       width: 100% !important;
     }
   }
 }
 
-/* 4. .sidebar__right：order:2 排右，sticky + 固定宽 240px，flex-shrink: 0
+/* 4. .sidebar__right：position:absolute 钉右边（**不参与 flex 空间分配**），
+   240px + sticky。绝对定位基于 .page (relative)。
    覆盖 mm 主题 @media (min-width: 64em) 里
    position:absolute + inset-inline-end:0 + margin-inline-end:-200px
-   （这些让 sidebar 脱流、推到 viewport 右边） */
+   （这些让 sidebar 脱流但用负 margin 偏移到 viewport 右边，文章区不居中） */
 .sidebar__right {
   order: 2;
-  position: sticky !important;
+  position: absolute !important;
   top: 0;
-  inset-inline-start: auto !important;
-  inset-inline-end: 0 !important;
-  align-self: flex-start;
-  flex-shrink: 0;
+  inset-inline-end: 0 !important; /* 钉 .page 右边缘 */
   margin: 0 !important;
-  margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
   padding: 0;
   width: 240px !important;
@@ -114,6 +116,14 @@ html {
   z-index: 10;
   overflow-wrap: break-word;
   float: none !important;
+}
+/* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
+   否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
+   保险起见给 .page / .page__inner-wrap / .page__content 显式设 visible。 */
+.layout--single .page,
+.layout--single .page__inner-wrap,
+.layout--single .page__content {
+  overflow: visible !important;
 }
 
 /* 5. TOC 列表内容强制在 200px 内换行（不溢出） */
