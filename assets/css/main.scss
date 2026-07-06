@@ -29,3 +29,64 @@ html {
     font-size: 19.8px !important; // 22 * 0.9
   }
 }
+
+/* ----------------------------------------------------------------------------
+   TOC 移到左侧 + 去框样式
+   主题默认 .sidebar__right 用 position:absolute + inset-inline-end 贴在
+   右侧；.toc 有青色标题块 + 描边。覆盖为左侧定位、纯文字列表，
+   视觉上跟顶部导航一致。
+   ---------------------------------------------------------------------------- */
+.sidebar__right {
+  position: relative;
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  margin-bottom: 1em;
+  width: 100%;
+
+  @include breakpoint($medium) {
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    width: $right-sidebar-width-narrow;
+    margin-inline-start: calc(-1 * (#{$right-sidebar-width-narrow} + 1em));
+    padding-inline-end: 1em;
+    z-index: 10;
+  }
+
+  @include breakpoint($large) {
+    width: $right-sidebar-width;
+    margin-inline-start: calc(-1 * (#{$right-sidebar-width} + 1em));
+  }
+
+  &.sticky {
+    @include breakpoint($medium) {
+      position: absolute;
+    }
+  }
+}
+
+.sidebar__right .toc {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+
+  > header {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    margin-bottom: 0.5em;
+  }
+
+  .nav__title {
+    color: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.02em;
+  }
+}
