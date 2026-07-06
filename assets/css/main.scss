@@ -383,4 +383,58 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
 .page__content {
   font-size: 0.85rem; /* 正文 14.4 * 0.85 ≈ 12.2px；标题按 rem 同比缩 */
 }
-/* retrigger build 2026-07-06-2103 */
+
+/* ----------------------------------------------------------------------------
+   修复代码块溢出到右 TOC 下面
+   右 TOC 改 absolute 后不占位，文章内代码块/长表格/图片如果宽度超过
+   720px 容器就会"穿过"TOC 显示——视觉上要么被截断，要么叠在 TOC 上。
+   解决：给所有可能撑爆的子元素 max-width:100% + overflow-x:auto，
+   table 用 table-layout:fixed 让 td 跟着容器收缩。
+   注意：不要给 .page__content 本身加 overflow:hidden——会破上面给
+   sticky TOC 留的 overflow:visible !important。
+   ---------------------------------------------------------------------------- */
+.layout--single .page__content {
+  min-width: 0; /* flex 子项必备：避免子元素最小尺寸撑爆容器 */
+
+  pre,
+  code,
+  .highlight,
+  figure.highlight,
+  .highlighter-rouge,
+  table,
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+  }
+
+  /* 代码块：mm 用 <table> 布局（gutter + code 两列），table 默认不收缩。
+     table-layout:fixed 让 td 宽度按容器比例切，长代码行内 pre 再 overflow:auto */
+  .highlight,
+  .highlighter-rouge,
+  figure.highlight {
+    overflow: hidden; /* 代码块 table 容器在 720px 内被裁剪 */
+    display: block;
+  }
+
+  .highlight table,
+  .highlighter-rouge table {
+    table-layout: fixed;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 长代码行：横向滚动而不是溢出 */
+  pre,
+  .highlight pre,
+  .highlighter-rouge pre {
+    overflow-x: auto;
+    word-break: normal; /* 不要打断英文/代码，让它水平滚 */
+  }
+
+  /* 普通 table（Markdown 渲染的）：同样收缩 */
+  table {
+    table-layout: fixed;
+    word-break: break-word;
+  }
+}
