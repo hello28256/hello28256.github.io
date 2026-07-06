@@ -56,14 +56,14 @@ jobs:
             \-\-disable-external \
             \-\-ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
 
-      - name: Debug: 列出 build 输出（确认非空）
+      - name: Debug build output
         run: |
-          echo "=== _site 目录 ==="
+          echo "=== _site dir ==="
           ls -la _site
-          echo "=== _site 文件数 ==="
+          echo "=== file count ==="
           find _site -type f | wc -l
           echo "=== _site/assets/css ==="
-          ls _site/assets/css 2>/dev/null || echo "CSS 目录不存在！"
+          ls _site/assets/css 2>/dev/null || echo "no CSS dir!"
 
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
