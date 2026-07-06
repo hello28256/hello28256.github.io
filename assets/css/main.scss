@@ -81,21 +81,25 @@ html {
   }
 }
 
-/* 4. .sidebar__right：sticky + 固定宽，flex-shrink: 0 不被压缩 */
+/* 4. .sidebar__right：sticky + 固定宽，flex-shrink: 0 不被压缩
+   用 !important 覆盖 mm 主题 @media (min-width: 64em) 里
+   的 position:absolute + inset-inline-end:0 + margin-inline-end:-200px
+   （这些让 sidebar 脱流、推到 viewport 右边） */
 .sidebar__right {
-  position: sticky;
-  top: 0;             /* 滚动时贴顶 */
+  position: sticky !important;
+  top: 0;
+  inset-inline-start: 0 !important;
+  inset-inline-end: auto !important;
   align-self: flex-start;
   flex-shrink: 0;
-  margin: 0;
+  margin: 0 !important;
+  margin-inline-end: 0 !important;
   padding: 0;
-  width: 200px;        /* 固定宽，跟之前一样 */
-  background: transparent; /* 不遮挡文章（你要求背景不透明或半透明不挡阅读） */
-  z-index: 10;          /* 滚动时保持在文章之上 */
+  width: 200px !important;
+  background: transparent;
+  z-index: 10;
   overflow-wrap: break-word;
-
-  /* 移动端隐藏（flex-direction: column 之后 TOC 还在文档流顶，
-     上面 @media (max-width: 63.9375em) 用 display:none 隐藏） */
+  float: none !important;
 }
 
 /* 5. TOC 列表内容强制在 200px 内换行（不溢出） */
