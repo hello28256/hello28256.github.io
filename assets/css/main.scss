@@ -69,8 +69,11 @@ html {
     padding-inline-end: 0 !important;
   }
 
-  /* 文章区：720px 居中（margin auto 是经典 block 居中） */
+  /* 文章区：720px 居中（margin auto 是经典 block 居中）
+     mm default `float:inline-start` 会让 margin auto 失效（浮动元素不参与
+     父级居中），必须先清掉。 */
   .page__inner-wrap {
+    float: none !important;       /* 清掉 mm default `float:inline-start` */
     width: 720px !important;
     max-width: 720px !important;
     min-width: 0 !important;
@@ -96,12 +99,13 @@ html {
    fixed 元素不受任何祖先滚动影响，永远在 viewport 右上角。
    不用 sticky 是因为 sticky 依赖最近可滚动祖先是 viewport——本站有
    各种 overflow:visible/auto 容器干扰，fixed 更稳。
-   masthead 实际高度约 11em + 1px border，top 给到 14em 留 3em 间距
-   ——masthead 内的主题切换按钮（iOS 风格 26px 高）会撑高 masthead，
-   top 12em 仍让 TOC 第一项被 masthead 底边线切到。 */
+   masthead 改 sticky (d2b86c8) 后**永远钉 viewport 顶 0**：
+   其高度 = masthead__inner-wrap padding 1em + 内容（logo + site-title
+   + 主题切换按钮 26px + 1px border）≈ 13em (18px 根字号下)。
+   14em 仍被 masthead 底边线切到。top:16em 留 3em 间距。 */
 .sidebar__right {
   position: fixed !important;
-  top: 14em;
+  top: 16em;
   right: 1em;
   align-self: flex-start;
   margin: 0 !important;
@@ -113,7 +117,7 @@ html {
   z-index: 10;
   overflow-wrap: break-word;
   float: none !important;
-  max-height: calc(100vh - 15em);
+  max-height: calc(100vh - 17em);
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
