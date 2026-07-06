@@ -69,27 +69,34 @@ html {
     padding-inline-end: 0 !important;
   }
 
-  /* 文章区：720px 居中（margin auto 是经典 block 居中）
-     mm default `float:inline-start` 会让 margin auto 失效（浮动元素不参与
-     父级居中），必须先清掉。 */
+  /* 文章区：保留全宽布局，不居中
+     原因：用户希望文章横跨整个 #main，但左边加 padding 让起点从浏览器
+     左边向右挪一点（不是居中，是靠左对齐 + 左偏移）。
+     - 清掉 mm default `float:inline-start`：浮动元素不参与父级布局，
+       padding-left 会被 wrap 在父容器内而不是溢出，不清掉看不出效果。
+     - 收回 720px width 限制，恢复横跨 #main 全宽。
+     - padding-left:12% 让文章起点从浏览器左边向右挪约 12% 视口宽。
+       右 TOC 宽度 240px + right:1em 在 viewport 右上角 fixed，跟文章
+       块独立，不会冲突。 */
   .page__inner-wrap {
     float: none !important;       /* 清掉 mm default `float:inline-start` */
-    width: 720px !important;
-    max-width: 720px !important;
+    width: auto !important;       /* 收回 720px 限制 */
+    max-width: 100% !important;
     min-width: 0 !important;
     margin-top: 1em;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12% !important; /* 起点从浏览器左边向右挪约 12% 视口宽 */
   }
 
-  /* 移动端：隐藏 TOC，文章占满 */
+  /* 移动端：隐藏 TOC，文章占满（也清掉 12% padding-left，回到贴边） */
   @media (max-width: 63.9375em) { /* < 1024px = mm 的 medium 断点之下 */
     .sidebar__right {
       display: none !important;
     }
     .page__inner-wrap {
-      width: 100% !important;
+      width: auto !important;
+      padding-left: 1em !important; /* 移动端不需要 12% 偏移，留点边距即可 */
     }
   }
 }
