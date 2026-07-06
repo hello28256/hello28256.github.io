@@ -270,6 +270,24 @@ html[data-theme="light"] textarea {
 html[data-theme="light"] table th { background-color: var(--mm-table-stripe); }
 html[data-theme="light"] .btn { color: var(--mm-text); border-color: var(--mm-border); }
 
+/* 页面 meta 文字（"最新文章"、"1 分钟阅读"、"少于 1 分钟阅读" 等）
+   主题默认在编译期硬编码为 #eee（dark 变量），light 主题下必须覆盖 */
+html[data-theme="light"] .archive__subtitle {
+  color: var(--mm-text);
+  border-bottom-color: var(--mm-rule);
+}
+html[data-theme="light"] .page__meta,
+html[data-theme="light"] .comment__date,
+html[data-theme="light"] .page__date,
+html[data-theme="light"] .page__meta-readtime,
+html[data-theme="light"] .page__meta-sep,
+html[data-theme="light"] .page__meta a,
+html[data-theme="light"] .page__meta i {
+  color: var(--mm-text-muted);
+}
+html[data-theme="light"] .page__meta a:hover { color: var(--mm-link); }
+html[data-theme="light"] .page__meta-title { color: var(--mm-text); }
+
 html[data-theme="dark"] body { color: var(--mm-text); }
 html[data-theme="dark"] a,
 html[data-theme="dark"] .page__content a { color: var(--mm-link); }
