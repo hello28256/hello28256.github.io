@@ -54,7 +54,7 @@ html {
     max-width: 100% !important;
     margin-left: 0 !important;
     padding-inline-end: 0 !important;
-    gap: 1.5em; /* TOC 和文章之间 1.5em 间距 */
+    gap: 2em; /* TOC 和文章之间 2em 间距，更透气 */
   }
 
   /* 2. 文章区：flex: 1 占满剩余宽度；min-width: 0 防止长代码/长链接撑爆 */
@@ -95,7 +95,7 @@ html {
   margin: 0 !important;
   margin-inline-end: 0 !important;
   padding: 0;
-  width: 200px !important;
+  width: 240px !important;
   background: transparent;
   z-index: 10;
   overflow-wrap: break-word;
