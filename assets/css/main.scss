@@ -96,12 +96,12 @@ html {
    fixed 元素不受任何祖先滚动影响，永远在 viewport 右上角。
    不用 sticky 是因为 sticky 依赖最近可滚动祖先是 viewport——本站有
    各种 overflow:visible/auto 容器干扰，fixed 更稳。
-   masthead 实际高度 ≈ 10.8em + border-bottom 1px = 约 11em。
-   上一版 top:11em 让 TOC 顶贴着 masthead 底边线——masthead 的灰横线
-   穿过 TOC 顶部。改 top:12em 给足 1em 间距。 */
+   masthead 实际高度约 11em + 1px border，top 给到 14em 留 3em 间距
+   ——masthead 内的主题切换按钮（iOS 风格 26px 高）会撑高 masthead，
+   top 12em 仍让 TOC 第一项被 masthead 底边线切到。 */
 .sidebar__right {
   position: fixed !important;
-  top: 12em;
+  top: 14em;
   right: 1em;
   align-self: flex-start;
   margin: 0 !important;
@@ -113,7 +113,7 @@ html {
   z-index: 10;
   overflow-wrap: break-word;
   float: none !important;
-  max-height: calc(100vh - 13em);
+  max-height: calc(100vh - 15em);
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
