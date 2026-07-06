@@ -52,16 +52,14 @@ html {
     top: 0;
     inset-inline-start: 0;
     inset-inline-end: auto;
-    /* 物理上只用左 3/4 宽：右 1/4 不存在。
-       75% 算式 = 父容器 .page 宽度的 0.75。 */
-    width: 75%;
+    width: $right-sidebar-width-narrow;
     margin-inline-start: 0;
-    padding-inline-end: 0;
+    padding-inline-end: 0.5em;
     z-index: 10;
   }
 
   @include breakpoint($large) {
-    width: 75%;
+    width: $right-sidebar-width;
     margin-inline-start: 0;
   }
 
