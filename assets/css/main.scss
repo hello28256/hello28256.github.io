@@ -52,16 +52,16 @@ html {
     top: 0;
     inset-inline-start: 0;
     inset-inline-end: auto;
-    /* 200px（mm 原版 $right-sidebar-width-narrow）× 4/3 = 267px */
-    width: 267px;
+    /* 267px / 2 = 134px */
+    width: 134px;
     margin-inline-start: 0;
     padding-inline-end: 0.5em;
     z-index: 10;
   }
 
   @include breakpoint($large) {
-    /* 300px（mm 原版 $right-sidebar-width）× 4/3 = 400px */
-    width: 400px;
+    /* 400px / 2 = 200px */
+    width: 200px;
     margin-inline-start: 0;
   }
 
