@@ -86,7 +86,10 @@ html {
     margin-top: 1em;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    padding-left: 12% !important; /* 起点从浏览器左边向右挪约 12% 视口宽 */
+    padding-left: 12% !important;  /* 起点从浏览器左边向右挪约 12% 视口宽 */
+    /* 右边给 TOC 留位置：16em ≈ 240px (TOC 宽) + 1em (gap) + 1em (留白)
+       否则代码块/表格/图片会撑出文章容器右边缘到 TOC 下面。 */
+    padding-right: 16em !important;
   }
 
   /* 移动端：隐藏 TOC，文章占满（也清掉 12% padding-left，回到贴边） */
