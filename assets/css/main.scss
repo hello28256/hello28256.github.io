@@ -11,21 +11,21 @@ search: false
 /* ----------------------------------------------------------------------------
    全站字号缩放覆盖
    主题默认 html { font-size: 16px / 18px / 20px / 22px（按断点） }，
-   所有 rem 基于此缩放。把根字号减半，使正文/标题/导航等同步缩小 50%。
+   所有 rem 基于此缩放。把根字号缩为 80%，使正文/标题/导航等同步缩小 20%。
    用 !important 覆盖主题内联在 _reset.scss 的样式。
    ---------------------------------------------------------------------------- */
 html {
-  font-size: 8px !important;
+  font-size: 12.8px !important; // 16 * 0.8
 
   @include breakpoint($medium) {
-    font-size: 9px !important; // 18 * 0.5
+    font-size: 14.4px !important; // 18 * 0.8
   }
 
   @include breakpoint($large) {
-    font-size: 10px !important; // 20 * 0.5
+    font-size: 16px !important; // 20 * 0.8
   }
 
   @include breakpoint($x-large) {
-    font-size: 11px !important; // 22 * 0.5
+    font-size: 17.6px !important; // 22 * 0.8
   }
 }
