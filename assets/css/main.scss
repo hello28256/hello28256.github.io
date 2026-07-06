@@ -77,25 +77,25 @@ html {
    .page 容器内左缘——这需要 .page 是 position:relative，让 sidebar__right
    的 absolute 相对 .page 而非 viewport 定位。
 
-   margin-left: 25% 让 .page 整体从屏幕左 25% 处开始，
-   文章内容在 25%-100% 区间（占屏幕右 75%），左侧 1/4 空白。 */
+   margin-left: 50% 让 .page 整体从屏幕左 50% 处开始，
+   文章内容在 50%-100% 区间（占屏幕右 50%），左侧 1/2 空白。 */
 .layout--single {
   .page {
     position: relative; /* 让 sidebar__right 的 absolute 相对 .page 定位 */
-    margin-left: 25%;
+    margin-left: 50%;
   }
   @include breakpoint($large) {
     .page {
       width: 100% !important;
       padding-inline-end: 0 !important;
-      margin-left: 25% !important;
+      margin-left: 50% !important;
     }
   }
   @include breakpoint($x-large) {
     .page {
       width: 100% !important;
       padding-inline-end: 0 !important;
-      margin-left: 25% !important;
+      margin-left: 50% !important;
     }
   }
 }
