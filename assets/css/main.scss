@@ -75,21 +75,27 @@ html {
 /* 文章页内容区沾满宽度：去掉 mm 主题在 .page 上预留的 200px / 300px
    （给 TOC 用的宽度），让正文用满整宽。TOC 仍用 absolute 定位贴在
    .page 容器内左缘——这需要 .page 是 position:relative，让 sidebar__right
-   的 absolute 相对 .page 而非 viewport 定位。 */
+   的 absolute 相对 .page 而非 viewport 定位。
+
+   margin-left: 25% 让 .page 整体从屏幕左 25% 处开始，
+   文章内容在 25%-100% 区间（占屏幕右 75%），左侧 1/4 空白。 */
 .layout--single {
   .page {
     position: relative; /* 让 sidebar__right 的 absolute 相对 .page 定位 */
+    margin-left: 25%;
   }
   @include breakpoint($large) {
     .page {
       width: 100% !important;
       padding-inline-end: 0 !important;
+      margin-left: 25% !important;
     }
   }
   @include breakpoint($x-large) {
     .page {
       width: 100% !important;
       padding-inline-end: 0 !important;
+      margin-left: 25% !important;
     }
   }
 }
