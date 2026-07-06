@@ -137,57 +137,57 @@ html[data-theme="dark"] {
 .theme-toggle {
   position: relative;
   display: inline-block;
-  width: 3.4rem;
-  height: 1.7rem;
+  width: 2.5rem;   /* 40px / 16 */
+  height: 1.4rem;  /* 22px / 16 ≈ 1.375 */
   margin-left: 0.75rem;
   padding: 0;
   background: var(--mm-text-muted);
   border: 1px solid var(--mm-border);
-  border-radius: 999px;
+  border-radius: 11px;
   cursor: pointer;
   vertical-align: middle;
   transition: background 0.25s ease, border-color 0.25s ease;
+  flex-shrink: 0;
 }
 .theme-toggle:hover {
-  background: var(--mm-link);
   border-color: var(--mm-link);
 }
 .theme-toggle__slider {
   position: absolute;
   top: 50%;
-  left: 0.15rem;
+  left: 0.1rem;
   transform: translateY(-50%);
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1rem;
+  height: 1rem;
   background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: left 0.25s ease, background 0.25s ease;
+  border-radius: 2px; /* VitePress 用方形滑块，半圆边框即可视觉匹配 */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease, background 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   line-height: 1;
 }
 .theme-toggle .icon-sun,
 .theme-toggle .icon-moon {
   position: absolute;
-  font-size: 0.85rem;
+  font-size: 0.65rem;
   line-height: 1;
   user-select: none;
 }
 /* 暗色主题：滑块在左，显示月亮 */
 .theme-toggle .icon-sun { display: none; }
 .theme-toggle .icon-moon { display: inline; }
-/* 亮色主题：滑块在右，显示太阳 */
+/* 亮色主题：滑块在右（VitePress translate(18px)），显示太阳 */
 html[data-theme="light"] .theme-toggle {
-  background: var(--mm-link);
+  background: var(--mm-text-muted);
 }
 html[data-theme="light"] .theme-toggle:hover {
-  background: var(--mm-link-hover);
+  border-color: var(--mm-link);
 }
 html[data-theme="light"] .theme-toggle__slider {
-  left: calc(100% - 1.55rem);
+  transform: translate(1.1rem, -50%);
   background: #fff;
 }
 html[data-theme="light"] .theme-toggle .icon-sun { display: inline; }
