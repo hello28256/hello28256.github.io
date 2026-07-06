@@ -115,6 +115,14 @@ html {
   border-bottom: 0 !important;
 }
 
+/* TOC 内容强制在 sidebar__right 宽度内换行（不溢出到文章区） */
+.toc,
+.toc__menu {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 .sidebar__right .toc {
   background: transparent;
   border: 0;
