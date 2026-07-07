@@ -39,10 +39,11 @@
   color: var(--vp-c-brand-2);
 }
 
-/* 首页 hero 有图时：图片铺满右侧，从顶部 nav 下沿到 footer 上沿 */
+/* 首页 hero 有图时：图片铺满右侧，垂直居中于 hero 容器 */
 .VPHero.has-image .container {
   position: relative;
   display: block !important;
+  min-height: 560px;
   padding-top: 64px;
 }
 .VPHero.has-image .main {
@@ -51,10 +52,11 @@
 }
 .VPHero .image-container {
   position: absolute;
-  top: 0;
+  top: 50%;
   right: max(64px, calc((100vw - 1280px) / 2));
-  width: min(560px, 40vw);
-  max-width: 50vw;
+  transform: translateY(-50%);
+  width: min(960px, 70vw);
+  max-width: 75vw;
 }
 .VPHero .image-bg,
 .VPHero .image-container .image {
