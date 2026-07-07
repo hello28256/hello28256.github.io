@@ -38,7 +38,7 @@
 }
 .vp-doc .hero-aside {
   position: absolute;
-  top: -345px;
+  top: -360px;
   right: max(32px, calc((100vw - 1280px) / 2 + 32px));
   width: min(360px, 26vw);
   max-width: 90vw;
