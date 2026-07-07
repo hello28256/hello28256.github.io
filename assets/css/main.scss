@@ -776,12 +776,13 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
   justify-content: flex-end !important;
 }
 
-/* 真·贴边：inner-wrap 必须撑满整个 .masthead（一路撑到 body 宽度），
-   不能 max-width 居中，否则视口比 1280 大时两侧会留出死空白。
-   这里用 100% + 取消居中 margin，强制占满。 */
+/* 内层跟正文 .page 对齐：左 nav (.sidebar--left) 宽 240px，
+   .page { padding-inline-start: 1em }，所以左 nav 左缘 = body 左边 + 1em。
+   给 inner-wrap 同样的 padding-inline-start: 1em，让 hello28256
+   跟左 nav 左缘、theme-toggle 跟右 TOC 右缘竖向对齐。 */
 .masthead__inner-wrap {
-  max-width: 100% !important;        /* 撑满父 .masthead（<body> 宽 - border） */
-  margin-inline: 0 !important;       /* 不要居中，让 site-title 贴左 */
-  padding-inline: 0 !important;      /* 跟之前的 padding-inline: 0 一起保证水平没 padding */
+  max-width: 100% !important;
+  margin-inline: 0 !important;
+  padding-inline: 1em !important;    /* 跟 .page padding-inline-start: 1em 一致 */
 }
 
