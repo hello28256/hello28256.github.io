@@ -866,12 +866,15 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
     }
 
     .pager__label {
-      font-size: 0.75em;
-      color: var(--mm-text-muted);
+      /* label 用主题主前景色，字号略小于 title；跟 VitePress outline-pager
+         "Previous page"/"Next page" 同色对比 */
+      font-size: 0.85em;
+      color: var(--mm-text);
     }
     .pager__title {
       font-size: 1em;
       font-weight: 600;
+      color: var(--mm-link);   /* title 用品牌绿，跟左 nav/toc active 同套色 */
       line-height: 1.4;
       /* 长标题截断，避免把卡片撑太高 */
       overflow-wrap: anywhere;
