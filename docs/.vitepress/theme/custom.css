@@ -37,7 +37,7 @@
   right: max(32px, calc((100vw - 1280px) / 2 + 32px));
   width: min(360px, 26vw);
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.7;
   color: var(--vp-c-text-2);
   text-align: justify;
