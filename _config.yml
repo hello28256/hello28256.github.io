@@ -10,7 +10,8 @@ minimal_mistakes_skin   : "dark"        # 深色皮肤：背景 #252a34、主色
 locale                  : "zh-CN"
 title                   : "hello28256"
 title_separator         : "-"
-subtitle                : "代码 · 阅读"
+# subtitle 留空字符串：masthead 不再渲染下面那一行小字（"代码 · 阅读"）
+subtitle                : ""
 name                    : &name "hello28256"
 description             : &description "hello28256 的个人主页：技术博客、项目作品集、在线书。"
 url                     : "https://hello28256.github.io"
