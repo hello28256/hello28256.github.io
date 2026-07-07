@@ -18,7 +18,7 @@
 /* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大 */
 .VPHome p {
   max-width: min(720px, 48vw);
-  margin-left: -100px;
+  margin-left: -50px;
   margin-top: 16px;
   font-size: 56px;
   font-weight: 500;
@@ -85,7 +85,7 @@
   order: 0 !important;
   flex-grow: 0 !important;
   min-height: 0 !important;
-  margin: -16px auto 0 -100px !important;
+  margin: -16px auto 0 -50px !important;
   width: min(720px, 48vw) !important;
   max-width: 90vw !important;
 }
