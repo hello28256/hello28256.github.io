@@ -50,18 +50,26 @@
   width: min(720px, 50%) !important;
   margin-inline-start: max(64px, calc((100vw - 1280px) / 2 + 64px)) !important;
 }
+/* 首页 hero 有图时：图片靠左、占视口约 60% 宽、高度按原图比例
+ * 推翻 VitePress 自带的 .image-container (320/392px 固定方框) 和
+ * .image-src (max-width: 192/256/320, position: absolute 居中)。*/
 .VPHero.has-image .image {
-  width: min(1400px, 85vw);
-  max-width: 90vw;
-  aspect-ratio: auto;
+  width: 60vw;
+  max-width: 1100px;
+  min-width: 360px;
+  margin-left: max(64px, calc((100vw - 1280px) / 2 + 64px));
+  margin-top: 32px;
+  margin-bottom: 0;
 }
 .VPHero.has-image .image-container {
   position: static !important;
   width: 100% !important;
   max-width: 100% !important;
   height: auto !important;
+  aspect-ratio: auto !important;
   transform: none !important;
   margin: 0 !important;
+  display: block !important;
 }
 .VPHero.has-image .image-container .image-bg {
   display: none;
@@ -76,6 +84,7 @@
   max-width: 100% !important;
   max-height: none !important;
   border-radius: 8px;
+  display: block;
 }
 
 /* 页脚 fade-in：默认隐藏（透明 + 略微下移），scroll 后才浮现。
