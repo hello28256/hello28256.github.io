@@ -381,7 +381,7 @@ html {
   --mm-code-text: #567482;
   --mm-footer-bg: #f5f5f5;
   --mm-page-bg: #ffffff;
-  --mm-rule: #bdc1c4;
+  --mm-rule: #e5e7e9; /* 比 --mm-border 更浅，专用于"最新文章"等标题下的细分隔线 */
   --mm-input-bg: #fff;
   --mm-table-stripe: #f7f7f7;
 }
