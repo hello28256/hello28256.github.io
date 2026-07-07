@@ -18,8 +18,8 @@ export default defineConfig({
     appearance: 'auto',
 
     nav: [
-      { text: '我的阅读', link: 'https://hello28256.github.io/book/', external: true },
-      { text: 'Coding', link: 'https://hello28256.github.io/Coding/', external: true },
+      { text: '我的阅读', link: 'https://hello28256.github.io/book/', external: true, target: '_self' },
+      { text: 'Coding', link: 'https://hello28256.github.io/Coding/', external: true, target: '_self' },
     ],
 
     sidebar: {
