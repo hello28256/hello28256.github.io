@@ -15,6 +15,15 @@
 /* blockquote 左边框变品牌绿 */
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
+/* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距（16px） */
+.VPHome blockquote {
+  max-width: min(720px, 48vw);
+  margin-left: 0;
+  margin-top: 16px;
+  border-left-color: var(--vp-c-brand-1);
+}
+.VPHome blockquote p { font-size: 16px; color: var(--vp-c-text-2); }
+
 /* 文章正文加粗变绿（仅 vp-doc 作用域，不污染侧栏） */
 .vp-doc strong { color: #00c853; font-weight: 700; }
 .dark .vp-doc strong { color: #00e676; }
