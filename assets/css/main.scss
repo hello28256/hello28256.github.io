@@ -76,16 +76,13 @@ html {
   .page {
     position: relative;
     display: grid !important;
-    grid-template-columns: 240px minmax(0, 1fr) 220px;
-    grid-template-areas: "left-nav article toc";
-    column-gap: 1.5em;
-    /* align-items: start 让 nav/TOC 列从 grid row 顶端开始，
-       跟文章标题顶端对齐；否则 stretch 会把 nav/TOC 拉满文章高度，
-       内容居中显示，看起来浮在屏幕中段。 */
+    /* grid 三列布局（仿 VitePress VPDoc）：左 nav + 中文章 + 右 TOC
+       masthead 高度 ≈ 5em，sticky top 给 5em 紧贴 tab 横线下方 */
+    grid-template-columns: 240px minmax(0, 1fr) 220px !important;
+    grid-template-areas: "left-nav article toc" !important;
+    column-gap: 1.5em !important;
     align-items: start !important;
     width: 100% !important;
-    /* 容器宽度 1480px：240 (左 nav) + 1.5em gap + ~960 (文章) + 1.5em gap + 220 (右 TOC) ≈ 1480
-       比 VitePress VPDoc x-large (1440) 多 40px，让中间文章列更舒展 */
     max-width: 1480px !important;
     margin: 0 auto !important;
     float: none !important;
@@ -134,12 +131,14 @@ html {
    - 当前站点 _posts/ 只有 2 篇，但保持 site.posts 自动消费结构
    ============================================================================ */
 .layout--single .sidebar--left.sticky {
-  /* sticky + grid row 顶端 = <article> 顶端 = masthead 下边线之后。
-     masthead 实测高 ≈ 2.5em（大屏 19.8px 下约 50px），top 给 4em 留 1.5em 间距。
-     align-self: start + grid 的 align-items: start 让 sticky 元素贴 row 顶端。
-     margin-top: 1em 跟 .page__inner-wrap 同一行（文章标题下方 1em 间距）。 */
+  /* sticky 钉 viewport 左侧、tab 横线正下方。
+     masthead 实测高 ≈ 5em（包含 padding 1em + 内容 ~3em），top 给 5em 紧贴。
+     不要在 sticky 元素自身设 max-height 或 overflow-y: auto——
+     否则滚动时 sticky 行为异常（nav 跟着页面下滚一段）。
+     让 nav 高度自然，由 sticky 把整个 box 钉在 viewport 顶部。 */
+  position: -webkit-sticky !important;
   position: sticky !important;
-  top: 4em !important;
+  top: 5em !important;
   align-self: start !important;
   float: none !important;
   width: 240px !important;
@@ -147,10 +146,7 @@ html {
   background: transparent !important;
   border: 0 !important;
   margin: 0 !important;
-  margin-top: 1em !important;
   z-index: 5;
-  max-height: calc(100vh - 5em);
-  overflow-y: auto;
 
   /* 隐藏滚动条但保留滚动能力 */
   scrollbar-width: none;
@@ -213,17 +209,17 @@ html {
    masthead 高 ≈ 13em，top: 14em 留 1em 间距
    ============================================================================ */
 .layout--single .sidebar__right.sticky {
-  /* sticky 钉 viewport：masthead 实测高 ≈ 2.5em（大屏 19.8px 下约 50px），
-     top 给 4em 留 1.5em 间距。align-self: start + grid align-items: start
-     让 TOC 起始位置 = grid row 顶端 = masthead 下边线。
-     margin-top: 1em 跟 .page__inner-wrap 同一行（文章标题下方 1em 间距）。 */
+  /* sticky 钉 viewport 右侧、tab 横线正下方。
+     不要在 sticky 元素自身设 max-height 或 overflow-y: auto——
+     否则滚动时 sticky 行为异常（TOC 跟着页面下滚一段）。
+     让 TOC 高度自然，由 sticky 把整个 box 钉在 viewport 顶部。 */
+  position: -webkit-sticky !important;
   position: sticky !important;
-  top: 4em !important;
+  top: 5em !important;
   right: auto !important;
   align-self: start !important;
   float: none !important;
   margin: 0 !important;
-  margin-top: 1em !important;
   margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
   padding: 0 !important;
@@ -232,8 +228,6 @@ html {
   border: 0 !important;
   z-index: 10;
   overflow-wrap: break-word;
-  max-height: calc(100vh - 5em);
-  overflow-y: auto;
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
@@ -301,25 +295,16 @@ html {
   }
 }
 
-/* 8. .toc__menu 列表：去掉项间 border、统一字号行高、可滚动 */
+/* 8. .toc__menu 列表：去掉项间 border、统一字号行高 */
 .toc__menu {
   list-style: none;
   margin: 0;
   padding: 0;
   font-size: 0.75rem;        /* 进一步缩到 0.75rem，更"侧边"感 */
 
-  /* 长目录在容器内滚动（仿 /book 的 VPDocAsideOutline）：
-     高度 = 100vh - masthead - nav 标题 - 留白 */
-  max-height: calc(100vh - 8em);
-  overflow-y: auto;
-
-  /* 隐藏滚动条但保留滚动能力（仿 book scrollbar-width:none） */
-  scrollbar-width: none;          /* Firefox */
-  &::-webkit-scrollbar {          /* Chrome/Safari/Edge */
-    display: none;
-    width: 0;
-    height: 0;
-  }
+  /* 不要在 sticky 容器内部设 overflow-y: auto / max-height：
+     会让 sticky 行为异常（TOC 跟着页面下滚一段距离）。
+     目录内容自然显示，由外层 sticky 容器负责整体钉住。 */
 
   a {
     display: block;
