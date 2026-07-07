@@ -19,7 +19,6 @@ export default defineConfig({
 
     nav: [
       { text: '首页', link: '/' },
-      { text: '关于', link: '/about' },
       { text: '我的阅读', link: 'https://hello28256.github.io/book/', external: true },
       { text: 'Coding', link: 'https://hello28256.github.io/Coding/1001Coding/', external: true },
     ],
