@@ -44,6 +44,7 @@
 .VPNavBar .VPNavBarTitle .title,
 .VPNavBar .VPNavBarMenuLink {
   color: var(--vp-c-brand-1);
+  font-size: 35px;
 }
 .VPNavBar .VPNavBarTitle:hover .title,
 .VPNavBar .VPNavBarMenuLink:hover {
