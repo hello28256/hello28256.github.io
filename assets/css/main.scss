@@ -630,6 +630,9 @@ html[data-theme="light"] .sidebar__right .toc > header .nav__title { color: var(
 html[data-theme="light"] .toc__menu a { color: var(--mm-text); }
 html[data-theme="light"] .toc__menu a:hover,
 html[data-theme="light"] .toc__menu .active a { color: var(--mm-link); }
+/* 压掉 mm .toc .active a { @include yiq-contrasted($active-color) } 给激活项的
+   浅绿底；保留文字色 + 左侧 2px 品牌 marker 即可凸显当前项 */
+html[data-theme="light"] .toc__menu .active a { background-color: transparent !important; }
 html[data-theme="light"] input,
 html[data-theme="light"] textarea {
   background-color: var(--mm-input-bg);
@@ -672,6 +675,10 @@ html[data-theme="dark"] .sidebar__right .toc__menu a { color: var(--mm-text); }
 html[data-theme="dark"] .sidebar__right .toc__menu a:hover,
 html[data-theme="dark"] .sidebar__right .toc__menu .active a { color: var(--mm-link); }
 html[data-theme="dark"] .sidebar__right .toc__menu .active a:hover { color: var(--mm-link-hover); }
+/* 同上；mm .toc .active a 用 yiq-contrasted 混入 $active-color
+   （暗皮肤 $primary-color=#00adb5 → 淡青蓝），与左侧 2px 品牌 marker 重叠，
+   去掉背景，只留文字色 + marker 标示 */
+html[data-theme="dark"] .sidebar__right .toc__menu .active a { background-color: transparent !important; }
 
 /* 防止主题切换闪烁（FOUC）：html 无 data-theme 时强制显示 dark 主题色，
    跟 _config.yml 当前 minimal_mistakes_skin: dark 一致 */
