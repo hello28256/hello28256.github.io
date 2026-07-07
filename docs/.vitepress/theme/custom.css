@@ -30,6 +30,19 @@
 .vp-doc strong { color: #6fbf82; font-weight: 700; }
 .dark .vp-doc strong { color: #BEEDC7; }
 
+/* 首页 hero 图右侧的长文：绝对定位到右上角，避开图和座右铭 */
+.VPHome .hero-aside {
+  position: absolute;
+  top: 120px;
+  right: max(32px, calc((100vw - 1280px) / 2 + 32px));
+  width: min(360px, 26vw);
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--vp-c-text-2);
+  text-align: justify;
+}
+
 /* 文章正文图片居中 + 限制最大宽度 */
 .vp-doc p > img,
 .vp-doc img {
