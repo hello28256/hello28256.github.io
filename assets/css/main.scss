@@ -102,6 +102,22 @@ html {
       padding-left: 1em !important; /* 移动端不需要 12% 偏移，留点边距即可 */
     }
   }
+
+  /* "猜您喜欢"相关文章：默认跟文章末尾对齐
+     mm 主题在 large/x-large 给 .page__related 加了
+     `float:inline-end; width:calc(100% - 240~300px)` ——是给"有右 sidebar"
+     的页面让位的。本站无右 sidebar（TOC 是 fixed 独立定位），
+     这条规则会把 .page__related 起点向右推 240~300px，
+     跟 .page__inner-wrap（文章末尾）左边对不齐。
+     清掉 float 和 width 限制，再用 margin-left:12% 跟文章 padding-left:12%
+     产生一致的视觉起点。 */
+  .page__related {
+    float: none !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin-left: 12% !important;       /* 跟 .page__inner-wrap padding-left:12% 起点一致 */
+    padding-left: 0 !important;
+  }
 }
 
 /* .sidebar__right：position:fixed 钉到 viewport 右上角
