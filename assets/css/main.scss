@@ -816,3 +816,81 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
    不用动 _config.yml / frontmatter，CSS 一刀切，全站不显示。 */
 .page__share { display: none !important; }
 
+/* ============================================================================
+   文章尾"上一页 / 下一页" 卡片（仿 VitePress VPDoc pager）
+   - mm 主题默认 .pagination 是两个并排的方形按钮容器 + 居中文本，
+     跟 VitePress outline-pager（小字 label + 大字标题）不一样。
+   - 在 _includes/post_pagination.html 里已用 .pagination.pager--vp 包围，
+     这里把外层变成两列 grid、内层卡片化，浮 float + 居中继承 mm 的样式
+     都被 !important 压掉。颜色走 --mm-link / --mm-text，跟主题色调统一。
+   ============================================================================ */
+.pagination.pager--vp {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 1em !important;
+  float: none !important;
+  width: 100% !important;
+  margin-top: 2em !important;
+  padding-top: 2em !important;
+  border-top: 1px solid var(--mm-border) !important;
+
+  .pagination--pager {
+    float: none !important;
+    width: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    gap: 0.25em !important;
+    padding: 0.75em 1em !important;
+    font-family: inherit !important;
+    font-size: 0.85rem !important;
+    font-weight: normal !important;
+    text-align: start !important;
+    text-decoration: none !important;
+    color: var(--mm-text) !important;
+    background: transparent !important;
+    border: 1px solid var(--mm-border) !important;
+    border-radius: 6px !important;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      color: var(--mm-link) !important;
+      background: transparent !important;
+      border-color: var(--mm-link) !important;
+    }
+
+    .pager__label {
+      font-size: 0.75em;
+      color: var(--mm-text-muted);
+    }
+    .pager__title {
+      font-size: 1em;
+      font-weight: 600;
+      line-height: 1.4;
+      /* 长标题截断，避免把卡片撑太高 */
+      overflow-wrap: anywhere;
+    }
+
+    &.pager--next {
+      text-align: end !important;
+      align-items: flex-end !important;
+    }
+    &.pager--prev {
+      text-align: start !important;
+      align-items: flex-start !important;
+    }
+
+    &.pager--disabled {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+  }
+}
+/* 移动端：单列 */
+@media (max-width: 63.9375em) {
+  .pagination.pager--vp {
+    grid-template-columns: 1fr !important;
+  }
+}
+
