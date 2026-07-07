@@ -16,8 +16,8 @@
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
 /* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大
- * 选择器用 .vp-doc（home layout 的 markdown 在 .vp-doc.container 下）*/
-.vp-doc p:first-of-type {
+ * 用 .motto 专属 class，避免 :first-of-type 误中其它段落 */
+.vp-doc .motto {
   max-width: min(720px, 48vw);
   margin-left: -60px;
   margin-top: 16px;
@@ -26,6 +26,7 @@
   color: var(--vp-c-brand-1);
   line-height: 1.5;
 }
+.vp-doc .motto p { margin: 0; font-size: inherit; color: inherit; }
 
 /* 文章正文加粗变绿（仅 vp-doc 作用域，不污染侧栏） */
 .vp-doc strong { color: #6fbf82; font-weight: 700; }
