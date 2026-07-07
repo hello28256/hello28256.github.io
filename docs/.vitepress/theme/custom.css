@@ -15,14 +15,17 @@
 /* blockquote 左边框变品牌绿 */
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
-/* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大
- * .motto 是包在 **...** 里的 span，颜色和字号通过它控制 */
+/* 首页 hero 图下方的座右铭：左对齐到图片左边，字号加大
+ * .motto 是包在 **...** 里的 span，颜色和字号通过它控制
+ * .main 容器 max-width: 720px 居中视口，.image 又被强制左偏 60px，
+ * 所以图片左边到 vp-doc 内容左边 = -((100vw - 720px) / 2 - 60px)，
+ * 用负 margin-left 把 motto 拉过去。窄屏用 min 兜底避免跑出视口。 */
 .vp-doc .motto {
   font-size: 56px;
   font-weight: 500;
   color: var(--vp-c-brand-1);
   line-height: 1.5;
-  margin-left: -32px;
+  margin-left: min(0px, calc(-((100vw - 720px) / 2 - 60px)));
 }
 
 /* 文章正文加粗变绿（仅 vp-doc 作用域，不污染侧栏） */
