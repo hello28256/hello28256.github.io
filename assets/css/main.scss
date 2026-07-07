@@ -523,8 +523,111 @@ html[data-theme="light"] pre {
   color: var(--mm-code-text);
   border-color: var(--mm-border);
 }
-html[data-theme="light"] .sidebar__right .toc { color: var(--mm-text-muted); }
-html[data-theme="light"] .toc__menu a { color: var(--mm-text-muted); }
+
+/* 代码块高亮：mm 主题 _syntax.scss 的 base16 调色板是为暗底设计的，
+   在 light 主题下浅色 token（白 #eeffff、浅青 #b2ccd6、青 #89ddff 等）
+   几乎不可见。这里按 GitHub Light 配色重写所有 token，覆盖 figure.highlight /
+   .highlighter-rouge / .hll / .c / .k / .n / ... 等所有 Rouge 短类选择器，
+   与 mm 默认 _syntax.scss 1:1 对应（行内 code 不在选择器范围内，不影响）。 */
+html[data-theme="light"] .highlight,
+html[data-theme="light"] figure.highlight,
+html[data-theme="light"] div.highlighter-rouge {
+  background-color: #f6f8fa;
+  color: #1f2328;
+}
+html[data-theme="light"] .highlight .hll { background-color: #e6f2ff; }
+html[data-theme="light"] .highlight .c,
+html[data-theme="light"] .highlight .cm,
+html[data-theme="light"] .highlight .cp,
+html[data-theme="light"] .highlight .c1,
+html[data-theme="light"] .highlight .cs { color: #6e7781; font-style: italic; } /* Comment */
+html[data-theme="light"] .highlight .err { color: #cf222e; }                    /* Error */
+html[data-theme="light"] .highlight .k,
+html[data-theme="light"] .highlight .kc,
+html[data-theme="light"] .highlight .kd,
+html[data-theme="light"] .highlight .kp,
+html[data-theme="light"] .highlight .kr { color: #cf222e; }                    /* Keyword */
+html[data-theme="light"] .highlight .kn { color: #0550ae; }                    /* Keyword.Namespace */
+html[data-theme="light"] .highlight .kt { color: #953800; }                    /* Keyword.Type */
+html[data-theme="light"] .highlight .o,
+html[data-theme="light"] .highlight .ow  { color: #0550ae; }                    /* Operator */
+html[data-theme="light"] .highlight .p  { color: #1f2328; }                    /* Punctuation */
+html[data-theme="light"] .highlight .n  { color: #1f2328; }                    /* Name */
+html[data-theme="light"] .highlight .nb,
+html[data-theme="light"] .highlight .bp,
+html[data-theme="light"] .highlight .ni,
+html[data-theme="light"] .highlight .nl,
+html[data-theme="light"] .highlight .py { color: #0550ae; }                    /* Name.Builtin etc. */
+html[data-theme="light"] .highlight .nc { color: #953800; }                    /* Name.Class */
+html[data-theme="light"] .highlight .nd { color: #0550ae; }                    /* Name.Decorator */
+html[data-theme="light"] .highlight .ne { color: #cf222e; }                    /* Name.Exception */
+html[data-theme="light"] .highlight .nf,
+html[data-theme="light"] .highlight .nx { color: #8250df; }                    /* Name.Function */
+html[data-theme="light"] .highlight .na { color: #8250df; }                    /* Name.Attribute */
+html[data-theme="light"] .highlight .nn { color: #953800; }                    /* Name.Namespace */
+html[data-theme="light"] .highlight .no { color: #116329; }                    /* Name.Constant */
+html[data-theme="light"] .highlight .nt { color: #0550ae; }                    /* Name.Tag */
+html[data-theme="light"] .highlight .nv,
+html[data-theme="light"] .highlight .vc,
+html[data-theme="light"] .highlight .vg,
+html[data-theme="light"] .highlight .vi { color: #953800; }                   /* Name.Variable */
+html[data-theme="light"] .highlight .l,
+html[data-theme="light"] .highlight .m,
+html[data-theme="light"] .highlight .mf,
+html[data-theme="light"] .highlight .mh,
+html[data-theme="light"] .highlight .mi,
+html[data-theme="light"] .highlight .mo,
+html[data-theme="light"] .highlight .il { color: #bc4c00; }                   /* Literal / Number */
+html[data-theme="light"] .highlight .s,
+html[data-theme="light"] .highlight .sb,
+html[data-theme="light"] .highlight .s2,
+html[data-theme="light"] .highlight .sh,
+html[data-theme="light"] .highlight .si,
+html[data-theme="light"] .highlight .sx,
+html[data-theme="light"] .highlight .sr,
+html[data-theme="light"] .highlight .s1,
+html[data-theme="light"] .highlight .ss { color: #0a3069; }                   /* String */
+html[data-theme="light"] .highlight .sc { color: #0a3069; }                    /* String.Char */
+html[data-theme="light"] .highlight .sd { color: #6e7781; }                    /* String.Doc */
+html[data-theme="light"] .highlight .se { color: #bc4c00; }                    /* String.Escape */
+html[data-theme="light"] .highlight .ld { color: #116329; }                    /* Literal.Date */
+html[data-theme="light"] .highlight .gd { color: #cf222e; }                    /* Generic.Deleted */
+html[data-theme="light"] .highlight .gi { color: #116329; }                    /* Generic.Inserted */
+html[data-theme="light"] .highlight .ge { font-style: italic; }
+html[data-theme="light"] .highlight .gh { color: #1f2328; font-weight: bold; } /* Generic.Heading */
+html[data-theme="light"] .highlight .gp { color: #6e7781; font-weight: bold; } /* Generic.Prompt */
+html[data-theme="light"] .highlight .gu { color: #0550ae; font-weight: bold; } /* Generic.Subheading */
+html[data-theme="light"] .highlight .gs { font-weight: bold; }
+html[data-theme="light"] .highlight .w  { color: #1f2328; }                    /* Whitespace */
+
+/* 行号 gutter 在浅底上也要换色，否则深色字 + 浅色背景对比反而 OK，
+   但深底白字会糊成一团；这里让 gutter 跟浅底保持一致 */
+html[data-theme="light"] .highlight td.gutter,
+html[data-theme="light"] .highlight td.rouge-gutter,
+html[data-theme="light"] .highlight td.code,
+html[data-theme="light"] .highlight td.rouge-code,
+html[data-theme="light"] .highlight pre,
+html[data-theme="light"] .highlight .highlight pre {
+  background-color: transparent;
+  color: #1f2328;
+  border-color: #d0d7de;
+}
+/* 行号分隔线、gutter 文字 */
+html[data-theme="light"] .highlight td.gutter,
+html[data-theme="light"] .highlight td.rouge-gutter {
+  color: #6e7781;
+  border-inline-end-color: #d0d7de;
+}
+
+/* TOC 字号/边距都不变。颜色：未激活用 mm-text（亮=#3d4144 近黑 / 暗=#eaeaea
+   近白）；激活 + hover 用品牌绿。mm 主题默认会拿 $muted-text-color 把
+   未激活染灰、yiq-contrasted 把激活染浅绿 + 反色文字，且通用暗色 a 规则
+   （见下方 html[data-theme="dark"] a）会把 TOC 所有 a 染成 --mm-link，
+   所以这里两个主题都得显式给 toc__menu a 一个明确层级，避免被通用规则吞。 */
+html[data-theme="light"] .sidebar__right .toc { color: var(--mm-text); }
+/* 同上；带 !important 是为了压过全局 .nav__title 的 !important（mm-text-muted 灰） */
+html[data-theme="light"] .sidebar__right .toc > header .nav__title { color: var(--mm-text) !important; }
+html[data-theme="light"] .toc__menu a { color: var(--mm-text); }
 html[data-theme="light"] .toc__menu a:hover,
 html[data-theme="light"] .toc__menu .active a { color: var(--mm-link); }
 html[data-theme="light"] input,
@@ -559,6 +662,16 @@ html[data-theme="dark"] a,
 html[data-theme="dark"] .page__content a { color: var(--mm-link); }
 html[data-theme="dark"] a:hover,
 html[data-theme="dark"] .page__content a:hover { color: var(--mm-link-hover); }
+
+/* 暗色 TOC：未激活用 --mm-text 白；hover/激活 = 品牌绿。
+   通用暗色 a 规则会把 .toc__menu a 一律染成绿（截图来源就在这里），
+   此处具体选 .sidebar__right 把作用域收紧到 TOC，不影响正文 a。 */
+html[data-theme="dark"] .sidebar__right .toc { color: var(--mm-text); }
+html[data-theme="dark"] .sidebar__right .toc > header .nav__title { color: var(--mm-text) !important; }
+html[data-theme="dark"] .sidebar__right .toc__menu a { color: var(--mm-text); }
+html[data-theme="dark"] .sidebar__right .toc__menu a:hover,
+html[data-theme="dark"] .sidebar__right .toc__menu .active a { color: var(--mm-link); }
+html[data-theme="dark"] .sidebar__right .toc__menu .active a:hover { color: var(--mm-link-hover); }
 
 /* 防止主题切换闪烁（FOUC）：html 无 data-theme 时强制显示 dark 主题色，
    跟 _config.yml 当前 minimal_mistakes_skin: dark 一致 */
