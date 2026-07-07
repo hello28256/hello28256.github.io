@@ -1,0 +1,15 @@
+{% assign locale = include.locale | default: site.locale %}
+{% assign updated = page.last_modified_at | default: page.date %}
+<div class="page-meta-bar">
+  <a class="page-meta-bar__edit"
+     href="https://github.com/{{ site.repository }}/edit/main/{{ page.path }}"
+     target="_blank" rel="noopener noreferrer">
+     <i class="fas fa-pen-to-square" aria-hidden="true"></i>
+     在 GitHub 上编辑此页
+  </a>
+  {% if updated %}
+  <span class="page-meta-bar__updated">
+    Last updated: <time datetime="{{ updated | date_to_xmlschema }}">{{ updated | date: "%Y/%-m/%-d %H:%M" }}</time>
+  </span>
+  {% endif %}
+</div>

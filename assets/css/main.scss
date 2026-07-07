@@ -822,13 +822,41 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
    不用动 _config.yml / frontmatter，CSS 一刀切，全站不显示。 */
 .page__share { display: none !important; }
 
-/* 文章末尾 mm 主题的 meta 区块（更新时间 / 分类 / 标签 / 阅读时长 /
-   最后编辑）一起隐藏。DOM 仍保留，不破坏 SEO 跟 a11y。
-   跟 VitePress outline 风格一致——下面直接是文章内容 + pager。 */
-.page__date,
-.page__meta,
-.page__meta-sep {
-  display: none !important;
+/* ============================================================================
+   文章尾"在 GitHub 上编辑此页" + Last updated 横栏（仿 VitePress）
+   - 左：edit 链接，挂在 site.repository / page.path
+   - 右：last_modified_at（无则用 page.date），格式 YYYY/M/D HH:MM
+   - flex 两端对齐，下边 1px 横线跟 VitePress outline-pager 上方分隔一致
+   ============================================================================ */
+.page-meta-bar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 0.5em !important;
+  margin-top: 2em !important;
+  padding-bottom: 1em !important;
+  border-bottom: 1px solid var(--mm-border) !important;
+  font-size: 0.85rem !important;
+
+  &__edit {
+    color: var(--mm-link) !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: var(--mm-link-hover) !important;
+      text-decoration: underline !important;
+    }
+
+    i {
+      margin-inline-end: 0.4em;
+    }
+  }
+
+  &__updated {
+    color: var(--mm-text-muted) !important;
+    time { color: inherit; }
+  }
 }
 
 /* ============================================================================
