@@ -31,13 +31,18 @@
 .vp-doc strong { color: #6fbf82; font-weight: 700; }
 .dark .vp-doc strong { color: #BEEDC7; }
 
-/* 首页 hero 图右侧的长文：绝对定位到右上角，避开图和座右铭
- * 选择器必须用 .vp-doc（home layout 的 markdown 在 .vp-doc.container 下，不在 .VPHome 下） */
+/* 首页 hero 图右侧的长文
+ * 让 .vp-doc（markdown 容器）作为 absolute 定位基准，
+ * 然后 .hero-aside 浮在右上角。*/
+.vp-doc {
+  position: relative !important;
+}
 .vp-doc .hero-aside {
   position: absolute;
-  top: 120px;
+  top: 0;
   right: max(32px, calc((100vw - 1280px) / 2 + 32px));
   width: min(360px, 26vw);
+  max-width: 90vw;
   margin: 0;
   font-size: 14px;
   line-height: 1.7;
