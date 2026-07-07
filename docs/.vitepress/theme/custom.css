@@ -34,7 +34,7 @@
 .vp-doc {
   position: relative !important;
   min-height: 540px;
-  transform: translateY(-580px);
+  transform: translateY(-460px);
 }
 .vp-doc .hero-aside {
   position: absolute;
