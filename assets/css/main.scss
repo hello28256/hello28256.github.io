@@ -633,6 +633,15 @@ html[data-theme="light"] .toc__menu .active a { color: var(--mm-link); }
 /* 压掉 mm .toc .active a { @include yiq-contrasted($active-color) } 给激活项的
    浅绿底；保留文字色 + 左侧 2px 品牌 marker 即可凸显当前项 */
 html[data-theme="light"] .toc__menu .active a { background-color: transparent !important; }
+/* 左 nav（.sidebar--left）：未激活 = mm-text（亮=#3d4144 近黑 / 暗=#eaeaea
+   近白），激活保留品牌绿 + 左侧 marker。同 toc：mm 主题默认 $muted-text-color
+   + 通用暗色 a 会把所有 a 染成 --mm-link，所以两个主题都显式压一层 */
+html[data-theme="light"] .sidebar--left .left-nav__item a { color: var(--mm-text); }
+html[data-theme="light"] .sidebar--left .left-nav__item a:hover { color: var(--mm-link); }
+
+/* 暗色 TOC：未激活用 --mm-text 白；hover/激活 = 品牌绿。
+   通用暗色 a 规则会把 .toc__menu a 一律染成绿（截图来源就在这里），
+   此处具体选 .sidebar__right 把作用域收紧到 TOC，不影响正文 a。 */
 html[data-theme="light"] input,
 html[data-theme="light"] textarea {
   background-color: var(--mm-input-bg);
@@ -679,6 +688,14 @@ html[data-theme="dark"] .sidebar__right .toc__menu .active a:hover { color: var(
    （暗皮肤 $primary-color=#00adb5 → 淡青蓝），与左侧 2px 品牌 marker 重叠，
    去掉背景，只留文字色 + marker 标示 */
 html[data-theme="dark"] .sidebar__right .toc__menu .active a { background-color: transparent !important; }
+
+/* 暗色左 nav：和右侧 TOC 完全镜像——未激活白、激活绿、激活无背景。
+   通用暗色 a 同样会把 .left-nav__item a 染绿，这里把作用域收紧到 .sidebar--left */
+html[data-theme="dark"] .sidebar--left .left-nav__title { color: var(--mm-text-muted); }
+html[data-theme="dark"] .sidebar--left .left-nav__item a { color: var(--mm-text); }
+html[data-theme="dark"] .sidebar--left .left-nav__item a:hover { color: var(--mm-link); }
+/* 去掉 mm 给激活项的 yiq-contrasted 背景（如果有），跟 toc 保持一致风格 */
+html[data-theme="dark"] .sidebar--left .left-nav__item--active a { background-color: transparent !important; }
 
 /* 防止主题切换闪烁（FOUC）：html 无 data-theme 时强制显示 dark 主题色，
    跟 _config.yml 当前 minimal_mistakes_skin: dark 一致 */
