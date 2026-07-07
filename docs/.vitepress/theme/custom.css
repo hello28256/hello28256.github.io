@@ -53,10 +53,10 @@
 .VPHero .image-container {
   position: absolute;
   top: 50%;
-  right: max(64px, calc((100vw - 1280px) / 2));
+  right: max(32px, calc((100vw - 1280px) / 2));
   transform: translateY(-50%);
-  width: min(960px, 70vw);
-  max-width: 75vw;
+  width: min(1200px, 88vw);
+  max-width: 92vw;
 }
 .VPHero .image-container .image-src {
   width: 100% !important;
