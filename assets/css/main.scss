@@ -745,3 +745,10 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
     word-break: break-word;
   }
 }
+
+/* masthead 双保险：强制 site-title 贴左、nav 贴右、horizontal padding 归零
+   （_masthead.scss 已改过一遍，这里用 !important 兜底避免任何主题样式残留） */
+.masthead__inner-wrap { padding-inline: 0 !important; max-width: 1280px !important; margin-inline: auto !important; }
+.masthead__inner-wrap > .site-title { margin-inline-start: 0 !important; }
+.masthead__inner-wrap > .greedy-nav { margin-inline-start: auto !important; flex-shrink: 0 !important; }
+.masthead__inner-wrap > .greedy-nav > .visible-links { flex: 0 0 auto !important; justify-content: flex-end !important; }
