@@ -112,10 +112,17 @@ html {
    masthead 改 sticky (d2b86c8) 后**永远钉 viewport 顶 0**：
    其高度 ≈ 13em (18px 根字号下)。
    之前 top:16em 留 3em 间距，用户觉得 TOC 离顶部仍太近，再往下挪 4em
-   到 top:20em，让 TOC 视觉上更靠近文章区头部、跟正文节奏更对齐。 */
-.sidebar__right {
+   到 top:20em，让 TOC 视觉上更靠近文章区头部、跟正文节奏更对齐。
+
+   重要：必须用 `.layout--single .sidebar__right.sticky` 这种**双类选择器**
+   覆盖 mm 主题的 `.sidebar__right.sticky` —— 后者选择器优先级 (0,2,0)
+   比 `.sidebar__right` (0,1,0) 高，即使加 !important 也可能被某些
+   浏览器实现按"非 !important 选择器优先级"误判。最稳妥是用更高特异性的
+   选择器 + !important 双保险（用 `top: 20em !important` 而不是只
+   `position: fixed !important`——确保 top 也被覆盖）。 */
+.layout--single .sidebar__right.sticky {
   position: fixed !important;
-  top: 20em;
+  top: 20em !important;
   right: 1em;
   align-self: flex-start;
   margin: 0 !important;
