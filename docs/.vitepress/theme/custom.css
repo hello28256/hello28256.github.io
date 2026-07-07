@@ -15,17 +15,14 @@
 /* blockquote 左边框变品牌绿 */
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
-/* 首页 hero 图下方的座右铭：左对齐到图片左边，字号加大
- * .motto 是包在 **...** 里的 span，颜色和字号通过它控制
- * .main 容器 max-width: 720px 居中视口，.image 又被强制左偏 60px，
- * 所以图片左边到 vp-doc 内容左边 = -((100vw - 720px) / 2 - 60px)，
- * 用负 margin-left 把 motto 拉过去。窄屏用 min 兜底避免跑出视口。 */
+/* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大
+ * .motto 是包在 **...** 里的 span，颜色和字号通过它控制 */
 .vp-doc .motto {
   font-size: 56px;
   font-weight: 500;
   color: var(--vp-c-brand-1);
   line-height: 1.5;
-  margin-left: min(0px, calc(-((100vw - 720px) / 2 - 60px)));
+  margin-left: -32px;
 }
 
 /* 文章正文加粗变绿（仅 vp-doc 作用域，不污染侧栏） */
@@ -42,11 +39,7 @@
 .vp-doc .hero-aside {
   position: absolute;
   top: -360px;
-  /* 红框右边到右边框的距离 = 图片左边到左边框的距离。
-   * 图片容器 .main 是 max-width: 720px 居中于视口，且 .image 强制左偏 60px，
-   * 所以图片左边到视口左边 = (100vw - 720px) / 2 - 60px。
-   * 用 max(32px, …) 保证窄屏不会贴到边框外。 */
-  right: max(32px, calc((100vw - 720px) / 2 - 60px));
+  right: max(32px, calc((100vw - 1280px) / 2 + 32px));
   width: min(360px, 26vw);
   max-width: 90vw;
   height: 540px;
