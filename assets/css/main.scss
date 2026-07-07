@@ -812,3 +812,7 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
   padding-inline-end: 1em !important;
 }
 
+/* 文章底部分享按钮（X/Facebook/LinkedIn/Bluesky）整块隐藏。
+   不用动 _config.yml / frontmatter，CSS 一刀切，全站不显示。 */
+.page__share { display: none !important; }
+
