@@ -65,11 +65,14 @@ html {
   .page {
     position: relative;
     display: grid !important;
-    grid-template-columns: 260px minmax(0, 1fr) 260px;
+    grid-template-columns: 280px minmax(0, 1fr) 260px;
     grid-template-areas: "left-nav article toc";
     column-gap: 1.5em;
     width: 100% !important;
-    max-width: 1280px !important;
+    /* VitePress VPDoc x-large 容器宽度（1440px）：
+       280 (左 nav) + 1.5em gap + ~860 (文章) + 1.5em gap + 260 (右 TOC) ≈ 1440。
+       比之前 1280px 多 160px，文章列实际能从 720px 拉到 ~860px */
+    max-width: 1440px !important;
     margin: 0 auto !important;
     float: none !important;
     padding-inline-start: 1em !important;
@@ -91,7 +94,8 @@ html {
     padding-left: 0 !important;
     padding-right: 0 !important;
 
-    .page__content { max-width: 720px; margin: 0 auto; }
+    /* 文章内容列宽 860px（VitePress VPDoc 默认 720 → 拉到 860 更舒展） */
+    .page__content { max-width: 860px; margin: 0 auto; }
   }
 
   /* 移动端：隐藏左右侧栏，文章单列 */
@@ -121,7 +125,7 @@ html {
   top: 14em !important;
   align-self: start;
   float: none !important;
-  width: 260px !important;
+  width: 280px !important;
   padding: 0 !important;
   background: transparent !important;
   border: 0 !important;
