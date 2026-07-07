@@ -118,11 +118,11 @@ html {
    - 20em：让 TOC 第一项对齐到 H3 → 用户嫌太下（跟正文节奏脱节）
    - 17em：折中对齐 H2 → 用户嫌还太下，要求对齐红线
    - 13em：贴 masthead 底 → 用户要再贴近
-   - **12.5em**：再往上 0.5em，让 TOC 顶略进入 masthead 底部边框区
-     视觉上跟 masthead 连成一片，但因 TOC 有自身不透明背景，masthead
-     的导航内容不会"穿"过来
+   - 12.5em：再往上 0.5em → 用户还要再往上
+   - **12em**：再往上 0.5em，TOC 顶更深地进入 masthead 区域，
+     因 TOC 有自身不透明背景，masthead 的导航内容不会"穿"过来
 
-   视觉冲突：masthead 改 sticky 后占满 viewport 宽，TOC 起点 12.5em 时
+   视觉冲突：masthead 改 sticky 后占满 viewport 宽，TOC 起点 12em 时
    会跟 masthead 重叠——需给 TOC 加 background-color 挡住 masthead
    内容透出来。padding: 0.25em 0.5em 给 TOC 留出内部边距（不顶到边界）。
 
@@ -132,7 +132,7 @@ html {
    双保险（top 也加 !important）。 */
 .layout--single .sidebar__right.sticky {
   position: fixed !important;
-  top: 12.5em !important;
+  top: 12em !important;
   right: 1em;
   align-self: flex-start;
   margin: 0 !important;
