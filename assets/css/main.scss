@@ -116,8 +116,13 @@ html {
    - 14em：被 masthead 底边线切到
    - 16em：留 3em 间距 → 用户嫌离顶部太近
    - 20em：让 TOC 第一项对齐到 H3 → 用户嫌太下（跟正文节奏脱节）
-   - **17em**：折中——留 4em 间距（masthead 13em + 4em 间距 = 17em），
-     TOC 第一项"H2 一级标题"大致对到文章"一级标题"位置，跟正文节奏对齐
+   - 17em：折中对齐 H2 → 用户嫌还太下，要求对齐红线
+   - **13em**：TOC 起点对齐到红线（masthead 下方 ~0px，肉眼可见地"贴着"
+     masthead 底边线开始），跟用户提供的红线参考位一致
+
+   视觉冲突：masthead 改 sticky 后占满 viewport 宽，TOC 起点 13em 时
+   会跟 masthead 重叠——需给 TOC 加 background-color 挡住 masthead
+   内容透出来。padding: 0.25em 0.5em 给 TOC 留出内部边距（不顶到边界）。
 
    重要：必须用 `.layout--single .sidebar__right.sticky` 这种**双类选择器**
    覆盖 mm 主题的 `.sidebar__right.sticky` —— 后者选择器优先级 (0,2,0)
@@ -125,19 +130,23 @@ html {
    双保险（top 也加 !important）。 */
 .layout--single .sidebar__right.sticky {
   position: fixed !important;
-  top: 17em !important;
+  top: 13em !important;
   right: 1em;
   align-self: flex-start;
   margin: 0 !important;
   margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
-  padding: 0;
+  /* TOC 起点跟 masthead 底部齐平（13em = masthead 高度），两者会重叠。
+     加 background-color + padding 让 TOC 内容不顶到 masthead 底边线、
+     且自身有不透明背景挡住 masthead 内容透出。 */
+  padding: 0.25em 0.5em !important;
   width: 240px !important;
-  background: transparent;
+  background: var(--mm-masthead-bg) !important;  /* 跟 masthead 同色，融入背景 */
+  border-radius: 4px;
   z-index: 10;
   overflow-wrap: break-word;
   float: none !important;
-  max-height: calc(100vh - 18em);
+  max-height: calc(100vh - 14em);
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
