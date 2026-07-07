@@ -51,6 +51,11 @@
   color: var(--vp-c-brand-2);
 }
 
+/* 去掉 nav 外链后的小箭头 ↗（VitePress .vp-external-link-icon 的 ::after） */
+.VPNavBar .VPNavBarMenuLink.vp-external-link-icon::after {
+  display: none;
+}
+
 /* 首页 hero 有图时：图水平居中、垂直居中、宽度自适应
  * 推翻 VitePress 自带的：
  *   .image  (flex-grow:1, order:2, min-height:100%) — 让 absolute 定位脱离 flex 流
