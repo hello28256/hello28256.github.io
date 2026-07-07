@@ -854,7 +854,12 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
   }
 
   &__updated {
-    color: var(--mm-text-muted) !important;
+    /* VitePress 风格：Last updated 用浅蓝背景高亮，像被选中态 */
+    background: rgba(96, 165, 250, 0.18) !important;
+    color: var(--mm-text) !important;
+    padding: 0.15em 0.55em !important;
+    border-radius: 4px !important;
+    font-variant-numeric: tabular-nums;
     time { color: inherit; }
   }
 }
@@ -873,9 +878,8 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
   gap: 1em !important;
   float: none !important;
   width: 100% !important;
-  margin-top: 2em !important;
-  padding-top: 2em !important;
-  border-top: 1px solid var(--mm-border) !important;
+  margin-top: 1em !important;
+  padding-top: 1em !important;
 
   .pagination--pager {
     float: none !important;
