@@ -38,12 +38,6 @@ author:
 
 # 顶部导航（external 走子站 /book/ 和 /Coding/...）
 navigation:
-  - title: "首页"
-    url : /
-  - title: "关于"
-    url : /about/
-  - title: "Posts"
-    url : /archive/
   - title: "我的阅读"
     url : "https://hello28256.github.io/book/"
     external: true
