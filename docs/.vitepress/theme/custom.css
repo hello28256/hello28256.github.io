@@ -22,6 +22,7 @@
   font-weight: 500;
   color: var(--vp-c-brand-1);
   line-height: 1.5;
+  margin-left: -32px;
 }
 
 /* 文章正文加粗变绿（仅 vp-doc 作用域，不污染侧栏） */
