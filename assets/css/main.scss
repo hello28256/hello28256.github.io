@@ -111,18 +111,21 @@ html {
    各种 overflow:visible/auto 容器干扰，fixed 更稳。
    masthead 改 sticky (d2b86c8) 后**永远钉 viewport 顶 0**：
    其高度 ≈ 13em (18px 根字号下)。
-   之前 top:16em 留 3em 间距，用户觉得 TOC 离顶部仍太近，再往下挪 4em
-   到 top:20em，让 TOC 视觉上更靠近文章区头部、跟正文节奏更对齐。
+
+   top 调整历程：
+   - 14em：被 masthead 底边线切到
+   - 16em：留 3em 间距 → 用户嫌离顶部太近
+   - 20em：让 TOC 第一项对齐到 H3 → 用户嫌太下（跟正文节奏脱节）
+   - **17em**：折中——留 4em 间距（masthead 13em + 4em 间距 = 17em），
+     TOC 第一项"H2 一级标题"大致对到文章"一级标题"位置，跟正文节奏对齐
 
    重要：必须用 `.layout--single .sidebar__right.sticky` 这种**双类选择器**
    覆盖 mm 主题的 `.sidebar__right.sticky` —— 后者选择器优先级 (0,2,0)
-   比 `.sidebar__right` (0,1,0) 高，即使加 !important 也可能被某些
-   浏览器实现按"非 !important 选择器优先级"误判。最稳妥是用更高特异性的
-   选择器 + !important 双保险（用 `top: 20em !important` 而不是只
-   `position: fixed !important`——确保 top 也被覆盖）。 */
+   比 `.sidebar__right` (0,1,0) 高，必须用更高特异性的选择器 + !important
+   双保险（top 也加 !important）。 */
 .layout--single .sidebar__right.sticky {
   position: fixed !important;
-  top: 20em !important;
+  top: 17em !important;
   right: 1em;
   align-self: flex-start;
   margin: 0 !important;
@@ -134,7 +137,7 @@ html {
   z-index: 10;
   overflow-wrap: break-word;
   float: none !important;
-  max-height: calc(100vh - 21em);
+  max-height: calc(100vh - 18em);
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
