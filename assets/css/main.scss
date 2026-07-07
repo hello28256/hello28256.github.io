@@ -809,7 +809,7 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
   margin-inline: 0 !important;
   /* 左边 padding 加大到 1.75em，让 hello28256/tab 整体往右挪一点 */
   padding-inline-start: 1.75em !important;
-  padding-inline-end: 1em !important;
+  padding-inline-end: 1.75em !important;   /* 跟左边一致：theme-toggle 右边距 = hello28256 左边距 */
 }
 
 /* 文章底部分享按钮（X/Facebook/LinkedIn/Bluesky）整块隐藏。
