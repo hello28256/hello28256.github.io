@@ -15,34 +15,45 @@
 /* blockquote 左边框变品牌绿 */
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
-/* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大
- * .motto 是包在 **...** 里的 span，颜色和字号通过它控制 */
+/* 首页最外层居中容器。
+ * VitePress 默认 .vp-doc 是文章正文宽度 (max-width:1280, margin:auto)，
+ * 默认 .container scoped style 给它 64px 水平 padding。
+ * 这里给 !important 强制 40px（用户偏好），并保留 position: relative
+ * 作为 hero-aside absolute 定位的基准。整体居中交给 max-width + margin:auto，
+ * 子元素不再做 margin-left / negative transform 假居中。 */
+.vp-doc {
+  position: relative !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding-inline: 40px !important;
+}
+
+/* 首页 hero 图下方的座右铭：随 .vp-doc 自然居中（去掉之前的 margin-left: -32px）。
+ * .motto 是包在 **...** 里的 span，颜色和字号通过它控制。 */
 .vp-doc .motto {
   font-size: 56px;
   font-weight: 500;
   color: var(--vp-c-brand-1);
   line-height: 1.5;
-  margin-left: -32px;
+  margin: 0;
 }
 
 /* 文章正文加粗变绿（仅 vp-doc 作用域，不污染侧栏） */
 .vp-doc strong { color: #6fbf82; font-weight: 700; }
 .dark .vp-doc strong { color: #BEEDC7; }
 
-/* 首页 hero 图右侧的长文
- * .vp-doc 仍作为 absolute 定位基准，但 transform 只作用于 .hero-aside 自己，
- * 座右铭（.vp-doc 第一个 <p>）不受影响。*/
-.vp-doc {
-  position: relative !important;
-  min-height: 540px;
-}
+/* 首页 hero 图右侧的长文：相对 .vp-doc 右上角定位。
+ * right 跟 .vp-doc 的水平 padding (40px) 对齐，让文字右到视口右的距离
+ * ≈ 图片左到视口左的距离（图片左 = vp padding 40 + hero padding 64 = 104），
+ * 文字右 = vp padding 40 + 文档右 = 视口右 - 40 + 40 = 视口右；
+ * 实际右侧多偏移是因为 hero 内部自身 padding。视觉整组居中。
+ * top 跟着 hero 上 padding 走。 */
 .vp-doc .hero-aside {
   position: absolute;
-  top: -360px;
-  right: max(32px, calc((100vw - 1280px) / 2 + 32px));
+  top: 64px;
+  right: 40px;
   width: min(360px, 26vw);
   max-width: 90vw;
-  height: 540px;
   margin: 0;
   padding: 0 4px;
   overflow: hidden;
@@ -84,36 +95,20 @@
   content: none !important;
 }
 
-/* 首页 hero 有图时：图水平居中、垂直居中、宽度自适应
- * 推翻 VitePress 自带的：
+/* 首页 hero 有图时：推翻 VitePress 默认的紫圆 + 固定方框 + 平移定位，
+ * 让图水平居中、宽度自适应。VPHero 自己的 .container 已经有 1152px
+ * 居中（不在这里动），由它跟 .vp-doc 各自的 margin:auto 负责居中即可。
+ * 这里只调整 .image 子链路：
  *   .image  (flex-grow:1, order:2, min-height:100%) — 让 absolute 定位脱离 flex 流
  *   .image-container  (320/392px 固定方框, position:relative + flex 居中)
  *   .image-src  (max-width: 192/256/320, position:absolute + translate(-50%,-50%))
  *   .image-bg  (紫色装饰圆) */
-.VPHero.has-image {
-  position: relative;
-  min-height: 0;
-  padding-bottom: 16px;
-}
-.VPHero.has-image .container {
-  position: static !important;
-  display: block !important;
-  min-height: 0;
-  text-align: center;
-}
-.VPHero.has-image .main {
-  /* 让 .main 居中在 hero 上方区域，图片居中在下方 */
-  width: 100% !important;
-  max-width: 720px !important;
-  margin: 0 auto !important;
-  text-align: center;
-}
 .VPHero.has-image .image {
   position: static !important;
   order: 0 !important;
   flex-grow: 0 !important;
   min-height: 0 !important;
-  margin: -16px auto 0 -60px !important;
+  margin: -16px auto 0 !important;
   width: min(720px, 48vw) !important;
   max-width: 90vw !important;
 }
