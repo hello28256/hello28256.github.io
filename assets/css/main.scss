@@ -49,124 +49,164 @@ html {
    ============================================================================ */
 
 /* ============================================================================
-   文章页布局：左文章居中 + 右 TOC sticky（仿 /book VPDoc）
-   - .page 是 block 容器（不是 flex），文章 720px 用 margin:0 auto 居中
-   - .sidebar__right 改 position:sticky，**不参与 flex 空间分配**，
-     下滚时钉到 viewport 顶部（mm 主题自带的 Gumshoe scrollspy 会自动
-     高亮当前章节 .active）
-   - 这是为了解决"文章下翻时 TOC 跟着滚走"的问题
-   ============================================================================ */
-.layout--single {
-  .page {
-    position: relative; /* sticky 的定位祖先（fallback） */
-    display: block !important;
-    float: none !important;     /* 清掉 mm default `float:inline-end`（display:block 不能 override float） */
-    width: 100% !important;     /* 清掉 mm default `width:calc(100% - 240px)` */
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-inline-start: 0 !important;
-    padding-inline-end: 0 !important;
-  }
-
-  /* 文章区：保留全宽布局，不居中
-     原因：用户希望文章横跨整个 #main，但左边加 padding 让起点从浏览器
-     左边向右挪一点（不是居中，是靠左对齐 + 左偏移）。
-     - 清掉 mm default `float:inline-start`：浮动元素不参与父级布局，
-       padding-left 会被 wrap 在父容器内而不是溢出，不清掉看不出效果。
-     - 收回 720px width 限制，恢复横跨 #main 全宽。
-     - padding-left:12% 让文章起点从浏览器左边向右挪约 12% 视口宽。
-       右 TOC 宽度 240px + right:1em 在 viewport 右上角 fixed，跟文章
-       块独立，不会冲突。 */
-  .page__inner-wrap {
-    float: none !important;       /* 清掉 mm default `float:inline-start` */
-    width: auto !important;       /* 收回 720px 限制 */
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin-top: 1em;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 12% !important;  /* 起点从浏览器左边向右挪约 12% 视口宽 */
-    /* 右边给 TOC 留位置：16em ≈ 240px (TOC 宽) + 1em (gap) + 1em (留白)
-       否则代码块/表格/图片会撑出文章容器右边缘到 TOC 下面。 */
-    padding-right: 16em !important;
-  }
-
-  /* 移动端：隐藏 TOC，文章占满（也清掉 12% padding-left，回到贴边） */
-  @media (max-width: 63.9375em) { /* < 1024px = mm 的 medium 断点之下 */
-    .sidebar__right {
-      display: none !important;
-    }
-    .page__inner-wrap {
-      width: auto !important;
-      padding-left: 1em !important; /* 移动端不需要 12% 偏移，留点边距即可 */
-    }
-  }
-
-  /* "猜您喜欢"相关文章：默认跟文章末尾对齐
-     mm 主题在 large/x-large 给 .page__related 加了
-     `float:inline-end; width:calc(100% - 240~300px)` ——是给"有右 sidebar"
-     的页面让位的。本站无右 sidebar（TOC 是 fixed 独立定位），
-     这条规则会把 .page__related 起点向右推 240~300px，
-     跟 .page__inner-wrap（文章末尾）左边对不齐。
-     清掉 float 和 width 限制，再用 margin-left:12% 跟文章 padding-left:12%
-     产生一致的视觉起点。 */
-  .page__related {
-    float: none !important;
-    width: auto !important;
-    max-width: 100% !important;
-    margin-left: 12% !important;       /* 跟 .page__inner-wrap padding-left:12% 起点一致 */
-    padding-left: 0 !important;
-  }
-}
-
-/* .sidebar__right：position:fixed 钉到 viewport 右上角
-   解决"下翻时 TOC 跟着滚走"的问题。
-   fixed 元素不受任何祖先滚动影响，永远在 viewport 右上角。
-   不用 sticky 是因为 sticky 依赖最近可滚动祖先是 viewport——本站有
-   各种 overflow:visible/auto 容器干扰，fixed 更稳。
-   masthead 改 sticky (d2b86c8) 后**永远钉 viewport 顶 0**：
-   其高度 ≈ 13em (18px 根字号下)。
-
-   top 调整历程：
-   - 14em：被 masthead 底边线切到
-   - 16em：留 3em 间距 → 用户嫌离顶部太近
-   - 20em：让 TOC 第一项对齐到 H3 → 用户嫌太下（跟正文节奏脱节）
-   - 17em：折中对齐 H2 → 用户嫌还太下，要求对齐红线
-   - 13em：贴 masthead 底 → 用户要再贴近
-   - 12.5em：再往上 0.5em → 用户还要再往上
-   - 12em：再往上 0.5em → 用户再要往上
-   - **7em**：用户要求一次往上 5em。当前 TOC 顶进入 masthead 区域
-     约 6em，会盖住 masthead 的 logo + 主题切换按钮区域，
-     导航菜单"首页 关于 Posts..."仍在 TOC 顶上方可见
-
-   视觉冲突：masthead 改 sticky 后占满 viewport 宽，TOC 起点 7em 时
-   会跟 masthead 大量重叠——需给 TOC 加 background-color 挡住 masthead
-   内容透出来。padding: 0.25em 0.5em 给 TOC 留出内部边距（不顶到边界）。
+   文章页布局：三列 grid（仿 /book VitePress VPDoc）
+   - 左 nav（.sidebar--left）：本站 _posts/ 列表，sticky 钉 viewport 左侧
+   - 中文章（.page__inner-wrap）：水平居中，max-width 720px
+   - 右 TOC（.sidebar__right）：On this page，sticky 钉 viewport 右侧
+   - .page 是 grid container，分配三列；masthead 高度 ≈ 13em，sticky top
+     给 14em 留 1em 间距
 
    重要：必须用 `.layout--single .sidebar__right.sticky` 这种**双类选择器**
    覆盖 mm 主题的 `.sidebar__right.sticky` —— 后者选择器优先级 (0,2,0)
    比 `.sidebar__right` (0,1,0) 高，必须用更高特异性的选择器 + !important
-   双保险（top 也加 !important）。 */
+   双保险（top 也加 !important）。左 nav 同理。
+   ============================================================================ */
+.layout--single {
+  .page {
+    position: relative;
+    display: grid !important;
+    grid-template-columns: 260px minmax(0, 1fr) 260px;
+    grid-template-areas: "left-nav article toc";
+    column-gap: 1.5em;
+    width: 100% !important;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    float: none !important;
+    padding-inline-start: 1em !important;
+    padding-inline-end: 1em !important;
+  }
+
+  /* 三列分别放到 grid 区域 */
+  .sidebar--left     { grid-area: left-nav; }
+  .page__inner-wrap  { grid-area: article; }
+  .sidebar__right    { grid-area: toc; }
+
+  /* 文章区：水平居中、最大 720px（VitePress VPDoc 默认） */
+  .page__inner-wrap {
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 1em auto 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
+    .page__content { max-width: 720px; margin: 0 auto; }
+  }
+
+  /* 移动端：隐藏左右侧栏，文章单列 */
+  @media (max-width: 63.9375em) {
+    .sidebar--left,
+    .sidebar__right {
+      display: none !important;
+    }
+    .page {
+      grid-template-columns: minmax(0, 1fr) !important;
+      grid-template-areas: "article" !important;
+    }
+    .page__inner-wrap {
+      padding-left: 1em !important;
+      padding-right: 1em !important;
+    }
+  }
+}
+
+/* ============================================================================
+   左 nav（.sidebar--left）：仿 VitePress VPDoc 左侧栏
+   - sticky 钉 viewport 左侧，top: 14em（masthead 高 13em + 1em 间距）
+   - 当前站点 _posts/ 只有 2 篇，但保持 site.posts 自动消费结构
+   ============================================================================ */
+.layout--single .sidebar--left.sticky {
+  position: sticky !important;
+  top: 14em !important;
+  align-self: start;
+  float: none !important;
+  width: 260px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  margin: 0 !important;
+  z-index: 5;
+  max-height: calc(100vh - 15em);
+  overflow-y: auto;
+
+  /* 隐藏滚动条但保留滚动能力 */
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+.left-nav__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--mm-text-muted);
+  margin: 0 0 0.75em 0;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid var(--mm-border);
+  letter-spacing: 0.02em;
+}
+
+.left-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.left-nav__item {
+  margin: 0;
+  padding: 0;
+
+  a {
+    display: block;
+    padding: 0.4em 0 0.4em 0.75em;
+    margin-left: -0.75em;       /* 让左侧 2px marker 视觉对齐列表左边 */
+    font-size: 0.85rem;
+    color: var(--mm-text-muted);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    line-height: 1.5;
+    transition: color 0.2s;
+    border-bottom: 0 !important;
+    border-radius: 0;
+    overflow-wrap: break-word;
+
+    &:hover {
+      color: var(--mm-text);
+    }
+  }
+
+  &--active a {
+    color: var(--mm-link) !important;
+    font-weight: 600;
+    border-left-color: var(--mm-link);
+  }
+}
+
+/* ============================================================================
+   右 TOC（.sidebar__right.sticky）：sticky 钉 viewport 右侧
+   从 fixed 改 sticky——三列 grid 已分配 toc 列位，sticky 更自然
+   masthead 高 ≈ 13em，top: 14em 留 1em 间距
+   ============================================================================ */
 .layout--single .sidebar__right.sticky {
-  position: fixed !important;
-  top: 7em !important;
-  right: 1em;
-  align-self: flex-start;
+  position: sticky !important;
+  top: 14em !important;
+  right: auto !important;
+  align-self: start;
+  float: none !important;
   margin: 0 !important;
   margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
-  /* TOC 起点跟 masthead 底部齐平（13em = masthead 高度），两者会重叠。
-     加 background-color + padding 让 TOC 内容不顶到 masthead 底边线、
-     且自身有不透明背景挡住 masthead 内容透出。 */
-  padding: 0.25em 0.5em !important;
+  padding: 0 !important;
   width: 240px !important;
-  background: var(--mm-masthead-bg) !important;  /* 跟 masthead 同色，融入背景 */
-  border-radius: 4px;
+  background: transparent !important;
+  border: 0 !important;
   z-index: 10;
   overflow-wrap: break-word;
-  float: none !important;
-  max-height: calc(100vh - 14em);
+  max-height: calc(100vh - 15em);
+  overflow-y: auto;
 }
 /* 4.1 让 TOC 真的 sticky：必须把它的祖先链里的 overflow 全设成 visible，
    否则 sticky 元素会被某个 overflow:hidden 容器裁剪失效。
