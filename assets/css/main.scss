@@ -61,18 +61,28 @@ html {
    比 `.sidebar__right` (0,1,0) 高，必须用更高特异性的选择器 + !important
    双保险（top 也加 !important）。左 nav 同理。
    ============================================================================ */
+
+/* ============================================================================
+   大屏下 #main 容器宽度：mm 默认 max-width = $x-large (1280px)，
+   浏览器 ≥1280px 时 #main 居中（margin: 0 auto），两侧剩余屏幕宽度全是死空白。
+   拉 .layout--single #main 也到 1480px，跟下面 .page 的 max-width 对齐，
+   让三列 grid 真正贴到屏幕边缘，把左右死空白收掉。
+   ============================================================================ */
+.layout--single #main {
+  max-width: 1480px !important;
+}
+
 .layout--single {
   .page {
     position: relative;
     display: grid !important;
-    grid-template-columns: 280px minmax(0, 1fr) 260px;
+    grid-template-columns: 240px minmax(0, 1fr) 220px;
     grid-template-areas: "left-nav article toc";
     column-gap: 1.5em;
     width: 100% !important;
-    /* VitePress VPDoc x-large 容器宽度（1440px）：
-       280 (左 nav) + 1.5em gap + ~860 (文章) + 1.5em gap + 260 (右 TOC) ≈ 1440。
-       比之前 1280px 多 160px，文章列实际能从 720px 拉到 ~860px */
-    max-width: 1440px !important;
+    /* 容器宽度 1480px：240 (左 nav) + 1.5em gap + ~960 (文章) + 1.5em gap + 220 (右 TOC) ≈ 1480
+       比 VitePress VPDoc x-large (1440) 多 40px，让中间文章列更舒展 */
+    max-width: 1480px !important;
     margin: 0 auto !important;
     float: none !important;
     padding-inline-start: 1em !important;
@@ -84,7 +94,7 @@ html {
   .page__inner-wrap  { grid-area: article; }
   .sidebar__right    { grid-area: toc; }
 
-  /* 文章区：水平居中、最大 720px（VitePress VPDoc 默认） */
+  /* 文章区：水平居中、最大 960px（比 VitePress 默认 720 宽，更舒展） */
   .page__inner-wrap {
     float: none !important;
     width: 100% !important;
@@ -94,8 +104,7 @@ html {
     padding-left: 0 !important;
     padding-right: 0 !important;
 
-    /* 文章内容列宽 860px（VitePress VPDoc 默认 720 → 拉到 860 更舒展） */
-    .page__content { max-width: 860px; margin: 0 auto; }
+    .page__content { max-width: 960px; margin: 0 auto; }
   }
 
   /* 移动端：隐藏左右侧栏，文章单列 */
@@ -125,7 +134,7 @@ html {
   top: 14em !important;
   align-self: start;
   float: none !important;
-  width: 280px !important;
+  width: 240px !important;
   padding: 0 !important;
   background: transparent !important;
   border: 0 !important;
@@ -204,7 +213,7 @@ html {
   margin-inline-start: 0 !important;
   margin-inline-end: 0 !important;
   padding: 0 !important;
-  width: 240px !important;
+  width: 220px !important;
   background: transparent !important;
   border: 0 !important;
   z-index: 10;
