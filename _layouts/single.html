@@ -84,7 +84,8 @@ layout: default
           <h4 class="page__meta-title">{{ site.data.ui-text[locale].meta_label }}</h4>
         {% endif %}
         {% include page__taxonomy.html locale=locale %}
-        {% include page__date.html locale=locale %}
+        {% comment %} 文章日期/更新时间改在 page-meta-bar.html 显示（仿 VitePress），
+           不要再 include page__date.html，避免出现两套时间文字。{% endcomment %}
       </footer>
 
       {% if page.share %}{% include social-share.html locale=locale %}{% endif %}
