@@ -16,7 +16,7 @@
   &__inner-wrap {
     @include clearfix;
     margin-inline: auto;
-    padding: 1em;
+    padding: 1em 0;
     max-width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -24,10 +24,15 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    align-items: center;
     font-family: $sans-serif-narrow;
 
     @include breakpoint($x-large) {
       max-width: $max-width;
+    }
+
+    > .site-title {
+      margin-inline-start: 0;
     }
 
     nav {
