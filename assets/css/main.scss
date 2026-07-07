@@ -776,3 +776,12 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
   justify-content: flex-end !important;
 }
 
+/* 真·贴边：inner-wrap 必须撑满整个 .masthead（一路撑到 body 宽度），
+   不能 max-width 居中，否则视口比 1280 大时两侧会留出死空白。
+   这里用 100% + 取消居中 margin，强制占满。 */
+.masthead__inner-wrap {
+  max-width: 100% !important;        /* 撑满父 .masthead（<body> 宽 - border） */
+  margin-inline: 0 !important;       /* 不要居中，让 site-title 贴左 */
+  padding-inline: 0 !important;      /* 跟之前的 padding-inline: 0 一起保证水平没 padding */
+}
+
