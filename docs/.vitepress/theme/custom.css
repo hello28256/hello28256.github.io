@@ -50,16 +50,20 @@
   width: min(720px, 50%) !important;
   margin-inline-start: max(64px, calc((100vw - 1280px) / 2 + 64px)) !important;
 }
-/* 首页 hero 有图时：图片靠左、占视口约 60% 宽、高度按原图比例
- * 推翻 VitePress 自带的 .image-container (320/392px 固定方框) 和
- * .image-src (max-width: 192/256/320, position: absolute 居中)。*/
+/* 首页 hero 有图时：图片用 absolute 浮动到 .main 右侧，
+ * 宽度约视口 50%、高度按原图比例、不被 VitePress 自带 320/392px 锁死。*/
+.VPHero.has-image {
+  position: relative;
+  min-height: 480px;
+}
 .VPHero.has-image .image {
-  width: 60vw;
-  max-width: 1100px;
+  position: absolute;
+  top: 50%;
+  right: max(64px, calc((100vw - 1280px) / 2));
+  transform: translateY(-50%);
+  width: 50vw;
+  max-width: 900px;
   min-width: 360px;
-  margin-left: max(64px, calc((100vw - 1280px) / 2 + 64px));
-  margin-top: 32px;
-  margin-bottom: 0;
 }
 .VPHero.has-image .image-container {
   position: static !important;
@@ -72,7 +76,7 @@
   display: block !important;
 }
 .VPHero.has-image .image-container .image-bg {
-  display: none;
+  display: none !important;
 }
 .VPHero.has-image .image-src {
   position: static !important;
