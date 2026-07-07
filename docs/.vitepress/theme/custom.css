@@ -39,31 +39,37 @@
   color: var(--vp-c-brand-2);
 }
 
-/* 首页 hero 有图时：图片铺满右侧，垂直居中于 hero 容器 */
-.VPHero.has-image .container {
-  position: relative;
-  display: block !important;
-  min-height: 560px;
-  padding-top: 64px;
-}
-.VPHero.has-image .main {
-  width: min(720px, 50%) !important;
-  margin-inline-start: max(64px, calc((100vw - 1280px) / 2 + 64px)) !important;
-}
-/* 首页 hero 有图时：图片用 absolute 浮动到 .main 右侧，
- * 宽度约视口 50%、高度按原图比例、不被 VitePress 自带 320/392px 锁死。*/
+/* 首页 hero 有图时：图水平居中、垂直居中、宽度自适应
+ * 推翻 VitePress 自带的：
+ *   .image  (flex-grow:1, order:2, min-height:100%) — 让 absolute 定位脱离 flex 流
+ *   .image-container  (320/392px 固定方框, position:relative + flex 居中)
+ *   .image-src  (max-width: 192/256/320, position:absolute + translate(-50%,-50%))
+ *   .image-bg  (紫色装饰圆) */
 .VPHero.has-image {
   position: relative;
   min-height: 480px;
 }
+.VPHero.has-image .container {
+  position: static !important;
+  display: block !important;
+  min-height: 480px;
+  text-align: center;
+}
+.VPHero.has-image .main {
+  /* 让 .main 居中在 hero 上方区域，图片居中在下方 */
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 0 auto !important;
+  text-align: center;
+}
 .VPHero.has-image .image {
-  position: absolute;
-  top: 50%;
-  right: max(64px, calc((100vw - 1280px) / 2));
-  transform: translateY(-50%);
-  width: 50vw;
-  max-width: 900px;
-  min-width: 360px;
+  position: static !important;
+  order: 0 !important;
+  flex-grow: 0 !important;
+  min-height: 0 !important;
+  margin: 32px auto 0 !important;
+  width: min(900px, 60vw) !important;
+  max-width: 90vw !important;
 }
 .VPHero.has-image .image-container {
   position: static !important;
