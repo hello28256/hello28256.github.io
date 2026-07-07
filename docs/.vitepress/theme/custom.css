@@ -15,8 +15,9 @@
 /* blockquote 左边框变品牌绿 */
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
-/* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大 */
-.VPHome p {
+/* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大
+ * 选择器用 .vp-doc（home layout 的 markdown 在 .vp-doc.container 下）*/
+.vp-doc p:first-of-type {
   max-width: min(720px, 48vw);
   margin-left: -60px;
   margin-top: 16px;
@@ -30,14 +31,15 @@
 .vp-doc strong { color: #6fbf82; font-weight: 700; }
 .dark .vp-doc strong { color: #BEEDC7; }
 
-/* 首页 hero 图右侧的长文：绝对定位到右上角，避开图和座右铭 */
-.VPHome .hero-aside {
+/* 首页 hero 图右侧的长文：绝对定位到右上角，避开图和座右铭
+ * 选择器必须用 .vp-doc（home layout 的 markdown 在 .vp-doc.container 下，不在 .VPHome 下） */
+.vp-doc .hero-aside {
   position: absolute;
   top: 120px;
   right: max(32px, calc((100vw - 1280px) / 2 + 32px));
   width: min(360px, 26vw);
   margin: 0;
-  font-size: 5px;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--vp-c-text-2);
   text-align: justify;
