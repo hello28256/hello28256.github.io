@@ -15,7 +15,6 @@ date: 2026-06-03 09:00:00
 **这里会有什么内容**：
 
 - 📝 技术博客（这一栏）
-- 👤 [关于我](/about)
 - ⌨️ [Coding](https://hello28256.github.io/Coding/1001Coding/)
 - 📚 [我的阅读](https://hello28256.github.io/book/)
 
