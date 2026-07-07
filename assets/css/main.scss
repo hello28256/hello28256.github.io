@@ -822,6 +822,15 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
    不用动 _config.yml / frontmatter，CSS 一刀切，全站不显示。 */
 .page__share { display: none !important; }
 
+/* 文章末尾 mm 主题的 meta 区块（更新时间 / 分类 / 标签 / 阅读时长 /
+   最后编辑）一起隐藏。DOM 仍保留，不破坏 SEO 跟 a11y。
+   跟 VitePress outline 风格一致——下面直接是文章内容 + pager。 */
+.page__date,
+.page__meta,
+.page__meta-sep {
+  display: none !important;
+}
+
 /* ============================================================================
    文章尾"上一页 / 下一页" 卡片（仿 VitePress VPDoc pager）
    - mm 主题默认 .pagination 是两个并排的方形按钮容器 + 居中文本，
