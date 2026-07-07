@@ -30,10 +30,9 @@
 
 /* 首页 hero 图右侧的长文
  * 让 .vp-doc（markdown 容器）作为 absolute 定位基准，
- * 并给一个 min-height 与 hero 图同高，让长文段有完整空间。*/
+ * .hero-aside 浮在右上角、与图同高，overflow: hidden 截断溢出。*/
 .vp-doc {
   position: relative !important;
-  min-height: 620px;
 }
 .vp-doc .hero-aside {
   position: absolute;
@@ -41,7 +40,10 @@
   right: max(32px, calc((100vw - 1280px) / 2 + 32px));
   width: min(360px, 26vw);
   max-width: 90vw;
+  height: 540px;
   margin: 0;
+  padding: 0 4px;
+  overflow: hidden;
   font-size: 14px;
   line-height: 1.7;
   color: var(--vp-c-text-2);
