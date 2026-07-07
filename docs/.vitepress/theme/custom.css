@@ -50,17 +50,31 @@
   width: min(720px, 50%) !important;
   margin-inline-start: max(64px, calc((100vw - 1280px) / 2 + 64px)) !important;
 }
-.VPHero .image-container {
-  position: absolute;
-  top: 50%;
-  right: max(32px, calc((100vw - 1280px) / 2));
-  transform: translateY(-50%);
+.VPHero.has-image .image {
   width: min(1400px, 85vw);
   max-width: 90vw;
+  aspect-ratio: auto;
 }
-.VPHero .image-container .image-src {
+.VPHero.has-image .image-container {
+  position: static !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+.VPHero.has-image .image-container .image-bg {
+  display: none;
+}
+.VPHero.has-image .image-src {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
   width: 100% !important;
   height: auto !important;
+  max-width: 100% !important;
+  max-height: none !important;
   border-radius: 8px;
 }
 
