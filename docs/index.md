@@ -7,7 +7,7 @@ hero:
     alt: hello28256
 ---
 
-<div class="motto">**做对的事情，把事情做对。**</div>
+**<span class="motto">做对的事情，把事情做对。</span>**
 
 <div class="hero-aside">
 

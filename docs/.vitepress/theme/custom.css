@@ -16,17 +16,13 @@
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
 /* 首页 hero 图下方的座右铭：左对齐 + 跟 hero 图同左边距，字号加大
- * 用 .motto 专属 class，避免 :first-of-type 误中其它段落 */
+ * .motto 是包在 **...** 里的 span，颜色和字号通过它控制 */
 .vp-doc .motto {
-  max-width: min(720px, 48vw);
-  margin-left: -60px;
-  margin-top: 16px;
   font-size: 56px;
   font-weight: 500;
   color: var(--vp-c-brand-1);
   line-height: 1.5;
 }
-.vp-doc .motto p { margin: 0; font-size: inherit; color: inherit; }
 
 /* 文章正文加粗变绿（仅 vp-doc 作用域，不污染侧栏） */
 .vp-doc strong { color: #6fbf82; font-weight: 700; }
@@ -34,9 +30,10 @@
 
 /* 首页 hero 图右侧的长文
  * 让 .vp-doc（markdown 容器）作为 absolute 定位基准，
- * 然后 .hero-aside 浮在右上角。*/
+ * 并给一个 min-height 与 hero 图同高，让长文段有完整空间。*/
 .vp-doc {
   position: relative !important;
+  min-height: 540px;
 }
 .vp-doc .hero-aside {
   position: absolute;
