@@ -746,9 +746,33 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
   }
 }
 
-/* masthead 双保险：强制 site-title 贴左、nav 贴右、horizontal padding 归零
-   （_masthead.scss 已改过一遍，这里用 !important 兜底避免任何主题样式残留） */
-.masthead__inner-wrap { padding-inline: 0 !important; max-width: 1280px !important; margin-inline: auto !important; }
-.masthead__inner-wrap > .site-title { margin-inline-start: 0 !important; }
-.masthead__inner-wrap > .greedy-nav { margin-inline-start: auto !important; flex-shrink: 0 !important; }
-.masthead__inner-wrap > .greedy-nav > .visible-links { flex: 0 0 auto !important; justify-content: flex-end !important; }
+/* ----------------------------------------------------------------------------
+   masthead 两端贴边 —— 双保险
+   _masthead.scss 已经把 .masthead__inner-wrap 的 padding 改为 `1em 0`，
+   但因 .greedy-nav 内的 .visible-links 有 `flex: 1`，且 nav 自身默认占满，
+   配合 space-between 容易出现"nav 没真的贴右"的视觉偏差。
+   这里再用更具体的选择器强制 site-title 贴左、nav 贴右、水平 padding 归零，
+   避免任何主题样式残留导致 inner-wrap 内左右留白。
+   ---------------------------------------------------------------------------- */
+.masthead__inner-wrap {
+  padding-inline: 0 !important;     /* 水平归零：左右贴边 */
+  max-width: 1280px !important;     /* 跟 #main max-width $x-large 对齐 */
+  margin-inline: auto !important;
+}
+
+.masthead__inner-wrap > .site-title {
+  margin-inline-start: 0 !important;
+}
+
+.masthead__inner-wrap > .greedy-nav {
+  margin-inline-start: auto !important;  /* 推到右 */
+  flex-shrink: 0 !important;             /* 别被挤窄 */
+}
+
+/* 把 nav 里被 flex: 1 撑大的 ul 缩回内容尺寸，让 theme-toggle 真的紧贴
+   ul 最右端、而非被撑出去的 ul 右侧推走 */
+.masthead__inner-wrap > .greedy-nav > .visible-links {
+  flex: 0 0 auto !important;
+  justify-content: flex-end !important;
+}
+
