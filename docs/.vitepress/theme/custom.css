@@ -29,16 +29,15 @@
 .dark .vp-doc strong { color: #BEEDC7; }
 
 /* 首页 hero 图右侧的长文
- * 让 .vp-doc（markdown 容器）作为 absolute 定位基准。
- * 用 transform: translateY 上移，避免跟 .container 的 margin 规则冲突。*/
+ * .vp-doc 仍作为 absolute 定位基准，但 transform 只作用于 .hero-aside 自己，
+ * 座右铭（.vp-doc 第一个 <p>）不受影响。*/
 .vp-doc {
   position: relative !important;
   min-height: 540px;
-  transform: translateY(-460px);
 }
 .vp-doc .hero-aside {
   position: absolute;
-  top: 0;
+  top: -460px;
   right: max(32px, calc((100vw - 1280px) / 2 + 32px));
   width: min(360px, 26vw);
   max-width: 90vw;
