@@ -167,6 +167,12 @@ html {
   letter-spacing: 0.02em;
 }
 
+/* 隐藏左 nav 的"阅读"标题和其下分割线（跟 VitePress outline 不要
+   标题块风格保持一致）。DOM 上仍保留 <h2>，不影响无障碍和 SEO */
+.left-nav__title {
+  display: none !important;
+}
+
 .left-nav__list {
   list-style: none;
   margin: 0;
