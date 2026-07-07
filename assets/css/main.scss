@@ -790,6 +790,8 @@ html:not([data-theme]) body { color: #eaeaea; background-color: #252a34; }
 .masthead__inner-wrap {
   max-width: 100% !important;
   margin-inline: 0 !important;
-  padding-inline: 1em !important;    /* 跟 .page padding-inline-start: 1em 一致 */
+  /* 左边 padding 加大到 1.75em，让 hello28256/tab 整体往右挪一点 */
+  padding-inline-start: 1.75em !important;
+  padding-inline-end: 1em !important;
 }
 
