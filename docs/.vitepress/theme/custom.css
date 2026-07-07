@@ -39,7 +39,11 @@
 .vp-doc .hero-aside {
   position: absolute;
   top: -360px;
-  right: max(32px, calc((100vw - 1280px) / 2 + 32px));
+  /* 红框右边到右边框的距离 = 图片左边到左边框的距离。
+   * 图片容器 .main 是 max-width: 720px 居中于视口，且 .image 强制左偏 60px，
+   * 所以图片左边到视口左边 = (100vw - 720px) / 2 - 60px。
+   * 用 max(32px, …) 保证窄屏不会贴到边框外。 */
+  right: max(32px, calc((100vw - 720px) / 2 - 60px));
   width: min(360px, 26vw);
   max-width: 90vw;
   height: 540px;
