@@ -51,9 +51,15 @@
   color: var(--vp-c-brand-2);
 }
 
-/* 去掉 nav 外链后的小箭头 ↗（VitePress .vp-external-link-icon 的 ::after） */
+/* 去掉 nav 外链后的小箭头 ↗
+ * VitePress 给 external: true 的 nav 项加 ↗ 图标，来源有：
+ *   1. .VPNavBarMenuLink[target="_blank"]::after
+ *   2. .vp-external-link-icon::after
+ * 两条都覆盖，避免其中一条没命中残留。*/
+.VPNavBar .VPNavBarMenuLink[target="_blank"]::after,
 .VPNavBar .VPNavBarMenuLink.vp-external-link-icon::after {
-  display: none;
+  display: none !important;
+  content: none !important;
 }
 
 /* 首页 hero 有图时：图水平居中、垂直居中、宽度自适应
