@@ -28,3 +28,13 @@
   width: 100%;
   height: auto;
 }
+
+/* 顶部 nav 标题（siteTitle）和菜单链接变品牌绿 */
+.VPNavBar .VPNavBarTitle .title,
+.VPNavBar .VPNavBarMenuLink {
+  color: var(--vp-c-brand-1);
+}
+.VPNavBar .VPNavBarTitle:hover .title,
+.VPNavBar .VPNavBarMenuLink:hover {
+  color: var(--vp-c-brand-2);
+}
