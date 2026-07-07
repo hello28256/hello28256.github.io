@@ -58,8 +58,7 @@
   width: min(960px, 70vw);
   max-width: 75vw;
 }
-.VPHero .image-bg,
-.VPHero .image-container .image {
+.VPHero .image-container .image-src {
   width: 100% !important;
   height: auto !important;
   border-radius: 8px;
