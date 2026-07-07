@@ -56,12 +56,13 @@
  *   .image-bg  (紫色装饰圆) */
 .VPHero.has-image {
   position: relative;
-  min-height: 480px;
+  min-height: 0;
+  padding-bottom: 16px;
 }
 .VPHero.has-image .container {
   position: static !important;
   display: block !important;
-  min-height: 480px;
+  min-height: 0;
   text-align: center;
 }
 .VPHero.has-image .main {
