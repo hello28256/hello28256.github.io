@@ -15,7 +15,7 @@ export default defineConfig({
 
   themeConfig: {
     siteTitle: 'hello28256',
-    appearance: 'auto',
+    appearance: 'dark',
 
     nav: [
       { text: '我的阅读', link: 'https://hello28256.github.io/book/', external: true, target: '_self' },

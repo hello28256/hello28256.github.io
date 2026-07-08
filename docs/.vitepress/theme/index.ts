@@ -49,6 +49,15 @@ export default {
   extends: DefaultTheme,
   setup() {
     const route = useRoute()
+
+    // 暗色为默认：VitePress 会读 localStorage 里的 'vitepress-theme-appearance'。
+    // 即便 config 写了 appearance: 'dark'，旧的亮色偏好也会盖过它，
+    // 在 SSR 注入 HTML 时导致首屏白闪。同步把存储也写成 'dark'。
+    // 注意：必须在客户端 JS 执行前完成，最早可在 setup() 里写。
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('vitepress-theme-appearance') !== 'dark') {
+      localStorage.setItem('vitepress-theme-appearance', 'dark')
+    }
+
     onMounted(() => {
       bind()
       watch(
