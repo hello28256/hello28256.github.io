@@ -3,7 +3,7 @@ layout: home
 
 hero:
   image:
-    src: /login-bg.png
+    src: /login-bg.webp
     alt: hello28256
 ---
 
