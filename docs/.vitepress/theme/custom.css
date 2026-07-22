@@ -16,10 +16,12 @@
 .vp-doc blockquote { border-left-color: var(--vp-c-brand-1); }
 
 /* 首页 hero 图下方的座右铭：居中 + 字号加大
- * .motto 是包在 **...** 里的 span，颜色和字号通过它控制 */
+ * .motto 是包在 **...** 里的 span，颜色和字号通过它控制
+ * padding-left 补偿末尾全角句号「。」右侧自带的空白，让视觉重心居中 */
 .vp-doc .motto {
   display: block;
   text-align: center;
+  padding-left: 0.5em;
   font-size: 56px;
   font-weight: 500;
   color: var(--vp-c-brand-1);
